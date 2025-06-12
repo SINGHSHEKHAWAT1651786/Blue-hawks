@@ -1,0 +1,85 @@
+[
+  {
+    "id": 1,
+    "name": "Canada, Hightech",
+    "image": "Images/Destination-image-1.webp",
+    "days": "7 Days",
+    "price": "$11000",
+    "location": "Canada",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 2,
+    "name": "France, Eiffel Tower",
+    "image": "Images/Destination-image-2.webp",
+    "days": "7 Days",
+    "price": "$15000",
+    "location": "France",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 3,
+    "name": "South Africa, Places",
+    "image": "Images/Destination-image-3.webp",
+    "days": "7 Days",
+    "price": "$19000",
+    "location": "South Africa",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 4,
+    "name": "Amazon, Renforest",
+    "image": "Images/Destination-image-4.webp",
+    "days": "7 Days",
+    "price": "$29000",
+    "location": "Amazon",
+    "pere": "Far far away, behind the word forest far from the countries .."
+  },
+  {
+    "id": 5,
+    "name": "United Arab Emirates, Desert",
+    "image": "/Public/Images/Destination-image-5.webp",
+    "days": "7 Days",
+    "price": "$90000",
+    "location": "Emirates",
+    "pere": "Far far away, behind the word mountain far from the countries..."
+  },
+  
+  {
+    "id": 6,
+    "name": "Rome, Colosseum",
+    "image": "Images/Destination-6.webp",
+    "days": "7 Days",
+    "price": "$14000",
+    "location": "Italy",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 7,
+    "name": "New York City, Tour",
+    "image": "Images/Destination-7.webp",
+    "days": "7 Days",
+    "price": "$20000",
+    "location": "USA",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 8,
+    "name": "Paris, City of Light",
+    "image": "Images/Destination-8.webp",
+    "days": "7 Days",
+    "price": "$16000",
+    "location": "France",
+    "pere": "Far far away, behind the word mountain far from the countries .."
+  },
+  {
+    "id": 9,
+    "name": "Udaipur, Paradise Places ",
+    "image": "/Public/Images/Destination-9.webp",
+    "days": "7 Days",
+    "price": "95000",
+    "location": "Udaipur",
+    "pere": "Far far away, behind the word mountain far from the countries..."
+  }
+
+]
