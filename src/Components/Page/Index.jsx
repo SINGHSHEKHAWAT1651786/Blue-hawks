@@ -110,10 +110,10 @@ function Index() {
       </Swiper>
 
       {/* Swiper navigation buttons */}
-      <div className="swiper-buttons d-flex justify-content-between mt-3">
+      {/* <div className="swiper-buttons d-flex justify-content-between mt-3">
         <div className="swiper-prev-btn btn btn-outline-light">Prev</div>
         <div className="swiper-next-btn btn btn-outline-light">Next</div>
-      </div>
+      </div> */}
       {/* Destination  */}
       <div className="Destination py-5 my-5">
         <div className="section-title">
