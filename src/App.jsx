@@ -1,6 +1,6 @@
 import './App.css';
 import Nav from "./Components/Nav/Nav";
-import Index from "./Components/Page/index";
+import Index from "./Components/Page/Index";
 import About from './Components/Page/About';
 import Tour from './Components/Page/Tour';
 import Footer from './Components/Footer/Footer';
