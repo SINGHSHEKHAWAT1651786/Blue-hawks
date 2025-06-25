@@ -1,27 +1,42 @@
-// src/Components/Nav.jsx
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// Nav.jsx
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
+
+import whiteLogo from "../../assets/whitelogo.png";   // top-of-page logo
+import colorLogo from "../../assets/logodesign.png";       // after-scroll logo
 
 function Nav() {
-  const [scrolled, setscrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      setscrolled(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }
-  }, []);
-  return (
-    <>
-      <nav className={`navbar navbar-expand-lg custom-nav position-fixed w-100 ${scrolled ? "black-them" : "white-them"}`}>
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+  const [scrolled, setScrolled] = useState(false);
 
-          <Link to="/" className="logo navbar-brand">
-            Blue<span>Hawk</span>
-          </Link>
+  /* theme swap on scroll */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 300);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+ return (
+  <>
+    <nav
+      className={`navbar navbar-expand-lg custom-nav position-fixed w-100 ${
+        scrolled ? "black-them" : "white-them"
+      }`}
+    >
+       <div className="container-fluid d-flex justify-content-between align-items-center">
+        {/* USE THE FLAG TO PICK THE IMAGE */}
+        <Link to="/" className="logo navbar-brand d-flex align-items-center">
+          <img
+            src={scrolled ? colorLogo : whiteLogo}
+            alt="BlueHawk logo"
+            style={{
+              height: "60px",
+              marginLeft: "-50px",
+              objectFit: "contain",
+            }}
+          />
+          Blue<span>Hawks</span>
+        </Link>
 
           <div className="d-flex align-items-center">
             {/* This is for search icon  */}
@@ -50,7 +65,7 @@ function Nav() {
             <li className="nav-item"><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
-      </nav>
+      </nav> 
       {/* Searching  */}
       {/* fade  animation  when click on search button  */}
       <div className="modal fade" id='searchModal' tabIndex='-1' aria-labelledby='searchModalLabel' aria-hidden="true">

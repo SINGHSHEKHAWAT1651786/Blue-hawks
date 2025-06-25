@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -68,9 +70,14 @@ function Index() {
             <div className="hero-content1 w-100 d-flex flex-column justify-content-center align-items-center">
               <h2 className="text-white">THE KINGDOM OF ICE</h2>
               <h1 className="text-white">Greenland</h1>
-              <button className="btn text-white hero-btn mt-5">
-                LEARN MORE <img src={btnArrow} className="img-fluid" alt="" />
-              </button>
+              {/* Learn more link  */}
+              <Link
+  to="/blog"                                       
+  className="btn text-white hero-btn mt-5 d-inline-flex align-items-center text-decoration-none"
+>
+  LEARN MORE
+  <img src={btnArrow} className="img-fluid ms-2" alt="arrow" />
+</Link>
             </div>
           </div>
         </SwiperSlide>
@@ -172,7 +179,7 @@ function Index() {
           </Splide>
           <p className="text-center mt-5 fs-5">
             Want to See Our Top Destination.
-            <a href="#" className="ms-1 text-decoration-underline">Click to View More</a>
+            <a href="/Destination" className="ms-1 text-decoration-underline">Click to View More</a>
           </p>
         </div>
       </div>
@@ -229,10 +236,10 @@ function Index() {
               {/* Left: Button + Testimonials */}
               <div className="about-bottom mt-5 d-flex gap-4">
                 <div className="btn-box">
-                  <button className="btn custom-btn1">
+                  <Link to='/About'className="btn custom-btn1">
                     Learn More
                     <img src={btnArrow} className="img-fluid ms-2" alt="Arrow Icon" />
-                  </button>
+                  </Link>
                 </div>
                 {/* Client img  */}
                 <div className="about-col-box d-flex align-items-center ms-2">
@@ -300,7 +307,7 @@ function Index() {
             </div>
           </div>
         </div>
-        <p className='text-center mt-5 fs-5'>Want to See Our Top Destinations.<a href="#">Click here to View More </a></p>
+        <p className='text-center mt-5 fs-5'>Want to See Our Top Destinations.<a href="/tour">Click here to View More </a></p>
       </div>
       {/* Working Steps  */}
       <div className="working py-4 my-5 position-relative">
@@ -377,10 +384,10 @@ function Index() {
 
                 {/* Call-to-action Button */}
                 <div className="btn-box offer-btn mt-4">
-                  <button className="btn custom-btn1">
+                  <Link to='/about'className="btn custom-btn1">
                     Learn More
                     <img src={btnArrow} className="img-fluid ms-1" alt="Arrow" />
-                  </button>
+                  </Link>
                 </div>
 
                 {/* Large Decorative Offer Number */}
@@ -489,10 +496,10 @@ function Index() {
         <div className="container banner-title section-title d-flex text-center">
           <h2>BlueHawk is a World Leading Tour Booking Platform</h2>
           <div className="btn-box mt-5">
-            <button className="btn custom-btn1">
+            <Link to='/contact' className="btn custom-btn1">
               Learn More
               <img src={btnArrow} className='img-fluid ms-2' alt="" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -554,8 +561,8 @@ function Index() {
       </div>
       <div className="text-center mt-4">
         <p className="text-center mt-5 fs-5">
-          Want to See Our Top Destination.
-          <a href="#" className="ms-1 text-decoration-underline">Click to View More</a>
+          Want to See Our Blogs.
+          <a href="/blog" className="ms-1 text-decoration-underline">Click to View More</a>
         </p>
       </div>
 
@@ -620,25 +627,25 @@ function Index() {
         <div className="col-12 col-md-4 mb-3 mb-md-0">
           <ul className="footer-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Offers</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/about">Offers</a></li>
+            <li><a href="/tour">Services</a></li>
           </ul>
         </div>
         <div className="col-12 col-md-4 mb-3 mb-md-0">
           <ul className="footer-links">
-            <li><a href="#">Booking</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="/contact">Booking</a></li>
+            <li><a href="/contact">FAQ</a></li>
             <li><a href="#">Hotels</a></li>
-            <li><a href="#">Teams</a></li>
+            <li><a href="/about">Teams</a></li>
           </ul>
         </div>
         <div className="col-12 col-md-4 mb-3 mb-md-0">
           <ul className="footer-links">
             <li><a href="#">Terms & Use</a></li>
             <li><a href="#">Sitemap</a></li>
-            <li><a href="#">Blogs</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="/blog">Blogs</a></li>
+            <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div>
       </div>

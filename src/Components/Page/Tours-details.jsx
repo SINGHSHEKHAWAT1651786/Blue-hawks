@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Datas from '../../Destination.json';
 
 const destinationimage1 = "/Images/Destination-8.webp";
 const destinationimage2 = "/Images/Destination-image-4.webp";
 const destinationimage3 = "/Images/Destination-image-2.webp";
 const destinationimage4 = "/Images/Destination-image-1.webp";
 
-function DestinationDetails() {
+function ToursDetails() {
+  const { id } = useParams();
+  const tour = Datas.find(item => item.id === parseInt(id));
+
+  if (!tour) return <p>Tour not found</p>;
+
   const images = [
     destinationimage1,
     destinationimage2,
@@ -15,6 +21,14 @@ function DestinationDetails() {
   ];
 
   const [mainImage, setMainImage] = useState(images[0]);
+  const [adultCount, setAdultCount] = useState(1);
+  const [childCount, setChildCount] = useState(1);
+
+  const priceAdult = parseInt(tour.price.replace(/\D/g, ""), 10) || 0;
+  const priceChild = parseInt(tour.price.replace(/\D/g, ""), 10) || 0;
+  const adultTotal = priceAdult * adultCount;
+  const childTotal = priceChild * childCount;
+  const total = adultTotal + childTotal;
 
   return (
     <>
@@ -22,15 +36,10 @@ function DestinationDetails() {
       <div className="section-banner w-100">
         <div className="container">
           <div className="section-banner-content">
-            <h2>Destination Details</h2>
+            <h2>{tour.name}</h2>
             <ul>
-              <li className="pe-2">
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <i className="bi bi-geo-alt fs-6 pe-2" />
-                Destination Details
-              </li>
+              <li className="pe-2"><Link to="/">Home</Link></li>
+              <li><i className="bi bi-gear fs-5 pe-2" /> Trip Details</li>
             </ul>
           </div>
         </div>
@@ -40,17 +49,14 @@ function DestinationDetails() {
       <div className="destination-container">
         <div className="container my-5">
           <div className="row g-4 destination-top">
-            {/* Thumbnails */}
-            <div className="col-lg-2 d-flex flex-column gap-2  destination-images" style={{ overflowY: 'auto', maxHeight: '450px' }}>
+            <div className="col-lg-2 d-flex flex-column gap-2 destination-images" style={{ overflowY: 'auto', maxHeight: '450px' }}>
               {images.map((img, index) => (
                 <div
                   key={`thumb-${index}`}
                   className={`destination-details-thumb d-flex ${mainImage === img ? 'active-thumb' : ''}`}
-
                   role="button"
                   tabIndex={0}
                   onMouseEnter={() => setMainImage(img)}
-
                   onKeyDown={(e) => e.key === "Enter" && setMainImage(img)}
                   style={{ cursor: "pointer" }}
                 >
@@ -64,15 +70,17 @@ function DestinationDetails() {
               ))}
             </div>
 
-
-            {/* Main image */}
             <div className="col-lg-6 position-relative destination-main-image h-100">
-              <img src={mainImage} className="img-fluid w-100" alt="Selected destination" />
+              <img src={`/${tour.image}`} className="img-fluid w-100" alt="Selected destination" />
             </div>
           </div>
 
-          {/* Facts grid */}
-          <h2 className="fw-bold mt-5 fs-1">New York, USA</h2>
+          <h2 className="fw-bold mt-5 fs-1">{tour.name}</h2>
+          <button type="button" className="btn btn-purple fs-4 open-book-tn"
+  data-bs-toggle="modal" data-bs-target="#bookingModal">
+            Book Now
+          </button>
+
           <div className="row">
             <div className="col-lg-9">
               <div className="row row-cols-2 row-cols-md-4 g-4 mt-2">
@@ -105,14 +113,8 @@ function DestinationDetails() {
           <div className="row mt-5">
             <div className="col-md-9">
               <h2 className="fw-bold fs-1">Overview</h2>
-              <p className="fs-5">
-                Fringer derew fvorgr odfrefof dcr osef me eorf emr. S mfopfrfk
-                fofrfomrpfg pfmero omgfrp vffr sfrfe.
-              </p>
-              <p className="fs-5">
-                Fringer derew fvorgr odfrefof dcr osef me eorf emr. S mfopfrfk
-                fofrfomrpfg pfmero omgfrp vffr sfrfe.
-              </p>
+              <p className="fs-5">Sample description about the tour goes here. You can replace this text.</p>
+              <p className="fs-5">You can also dynamically include content about the tour from `Destination.json` later.</p>
             </div>
           </div>
 
@@ -165,7 +167,7 @@ function DestinationDetails() {
                 <h5 className="mb-4 fs-3">You can send an enquiry via the form below.</h5>
                 <p className="mb-3">
                   <strong className="fs-6">Trip name:</strong>{" "}
-                  <span className="text-danger">*</span> New York, USA
+                  <span className="text-danger">*</span> {tour.name}
                 </p>
 
                 <form className="destination-details-form">
@@ -183,13 +185,9 @@ function DestinationDetails() {
                     <div className="col-md-6">
                       <label className="form-label">Country</label>
                       <select className="form-select" defaultValue="">
-                        <option value="" disabled>
-                          Choose a country
-                        </option>
+                        <option value="" disabled>Choose a country</option>
                         {["USA", "UK", "India", "Canada"].map((c) => (
-                          <option key={c} value={c}>
-                            {c}
-                          </option>
+                          <option key={c} value={c}>{c}</option>
                         ))}
                       </select>
                     </div>
@@ -217,7 +215,7 @@ function DestinationDetails() {
 
                   <div className="mb-3">
                     <label className="form-label">Your Message</label>
-                    <textarea type="text" className="form-control w-100" placeholder="Enter your message" />
+                    <textarea className="form-control w-100" placeholder="Enter your message" />
                   </div>
 
                   <div className="text-center">
@@ -229,10 +227,11 @@ function DestinationDetails() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </>
   );
 }
 
-export default DestinationDetails;
+export default ToursDetails;
