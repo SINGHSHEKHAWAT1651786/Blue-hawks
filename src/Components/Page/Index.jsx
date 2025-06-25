@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 //Data
-import Destination from './../../Destination.json'
+import Destination from '../../Destination.json'
 import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
 import btnArrow from './../../assets/btn-arrow.svg';
 import plane from './../../assets/plane.svg';
