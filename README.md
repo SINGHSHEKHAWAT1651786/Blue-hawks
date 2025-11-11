@@ -8,4 +8,4 @@ Tech-Stack: HTML, CSS, Tailwind, Javascript, React, Bootstrap,AI tool(chatgpt, g
 
 It is a Frontend Project in which APIs key used and for designing advance CSS.
 
-
+Deploy this project on firebase, also live on the offical website.
