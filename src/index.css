@@ -42,7 +42,7 @@
 }
 
 body {
-  /* For disabling scrolling */
+  /* For disabling scrolling used overflow */
   overflow-x: hidden !important;
 }
 /* ─── LOGO WRAPPER ───── */
@@ -129,7 +129,7 @@ body {
 .nav-item a::after {
   content: '';
   position: absolute;
-  bottom: -2px;                 /* Adjust to fine-tune spacing */
+  bottom: -2px;                 /* Adjust to fine-tune spacing of the botton*/
   left: 50%;                    /* Center horizontally */
   width: 0;
   height: 2px;
@@ -173,7 +173,7 @@ body {
   box-shadow: none !important;  
   transition: background-color .25s ease, transform .25s ease;
 }
-/* hover feedback  */
+/* Hover feedback  */
 .white-them .navbar-toggler:hover,
 .white-them .navbar-toggler:focus-visible {           /* hero section */
   background-color: rgba(255,255,255,.18);            /* frosted white */
@@ -202,7 +202,7 @@ body {
   border: none !important;
 }
 
-/* Hero Header- Word and button */
+/* Hero Header- Word and Button */
 .hero {
   height: 100vh;
   position: relative;
