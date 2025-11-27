@@ -6,7 +6,7 @@ BlueHawk is a responsive tourist and travel website built with React.It fetches 
 Tech-Stack: HTML, Tailwind CSS, Tailwind, Javascript, React, Bootstrap,AI tool(chatgpt, gemini, github-copilot, claude) etc. 
 
 
-It is a Frontend Project in which APIs key used and for designing advance CSS.
+It is a Frontend Project in which APIs key used and for designing advance Tailwind CSS.
 
 Deploy this project on firebase. 
 
