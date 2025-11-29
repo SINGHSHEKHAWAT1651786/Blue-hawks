@@ -24,7 +24,7 @@
   --pg-color: #363539;
   --btn-dark: #212529;
 
-  /* Mix of two color */
+  /* Here Mix of two color */
   --prim-gradient: linear-gradient(90deg, #4300e7 0%, #7d00fc 100%);
   --btn-light: linear-gradient(90deg, #4300e7 0%, #7d00fc 100%);
 
@@ -36,7 +36,7 @@
   --social-color: #434cda;
   --secondary-color: #54595f;
 
-  /* Transition duration for color hover  */
+  /* It Transition duration for color hover  */
   --rtransition-regular: .3s;
   --rtransition-slow: .6s;
 }
@@ -188,9 +188,6 @@ body {
 .navbar-toggler:focus-visible .navbar-toggler-icon {
   transform: scale(1.06);
 }
-
-
-
 
 .modal {
   background-color: #00000065;
