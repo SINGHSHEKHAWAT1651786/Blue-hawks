@@ -1,4 +1,4 @@
-// Nav.jsx
+// Here is the profile of Nav.jsx
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ import colorLogo from "../../assets/logodesign.png";       // after-scroll logo
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
 
-  /* theme swap on scroll */
+  /*Here update the theme swap on scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 300);
     window.addEventListener("scroll", onScroll);
