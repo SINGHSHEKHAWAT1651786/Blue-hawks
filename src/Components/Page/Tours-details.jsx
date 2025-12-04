@@ -45,7 +45,7 @@ function ToursDetails() {
         </div>
       </div>
 
-      {/* Main section */}
+      {/* Main section of desination */}
       <div className="destination-container">
         <div className="container my-5">
           <div className="row g-4 destination-top">
