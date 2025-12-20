@@ -1,4 +1,15 @@
-
+import './App.css';
+import Nav from "./Components/Nav/Nav";
+import Index from "./Components/Page/Index";
+import About from './Components/Page/About';
+import Tour from './Components/Page/Tour';
+import Footer from './Components/Footer/Footer';
+import Destination from './Components/Page/Destination';
+import DestinationDetails from './Components/Page/Destination-details';
+import ToursDetails from './Components/Page/Tours-details';
+import Blog from './Components/Page/Blog';
+import Contact from './Components/Page/Contact';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation();  // This is now safe
