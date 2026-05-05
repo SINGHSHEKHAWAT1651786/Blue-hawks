@@ -2183,7 +2183,7 @@ body {
   .custom-nav {
     padding: 0 1rem;
     height: 64px;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .navbar-nav {

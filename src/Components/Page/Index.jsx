@@ -143,7 +143,7 @@ function Index() {
                 speed: 1,
                 autoStart: true,
               },
-              breakpoint: {
+              breakpoints: {
                 1199: { perPage: 3 },
                 911: { perPage: 2 },
                 767: { perPage: 2 },

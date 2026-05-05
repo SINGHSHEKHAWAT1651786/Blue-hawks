@@ -8,6 +8,8 @@ import colorLogo from "../../assets/logodesign.png";       // after-scroll logo
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const navRef = useRef();
 
   /*Here update the theme swap on scroll */
   useEffect(() => {
@@ -16,9 +18,23 @@ function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  
  return (
   <>
     <nav
+      ref={navRef}
       className={`navbar navbar-expand-lg custom-nav position-fixed w-100 ${
         scrolled ? "black-them" : "white-them"
       }`}
@@ -41,28 +57,24 @@ function Nav() {
           <div className="d-flex align-items-center">
             {/* This is for search icon  */}
              {/* This opens the search modal when the icon is clicked */}
-            <i className="bi bi-search me-2 search-icon" type='button'data-bs-toggle="modal" data-bs-target='#searchModal'></i>
+            {/* <i className="bi bi-search me-2 search-icon" type='button'data-bs-toggle="modal" data-bs-target='#searchModal'></i> */}
             <button
               className="navbar-toggler"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              onClick={() => setOpen(!open)}
             >
 
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>
         </div>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div className={`collapse navbar-collapse ${open ? "show" : ""}`}>
           <ul className="navbar-nav align-items-center">
-            <li className="nav-item"><Link to="/">Home</Link></li>
-            <li className="nav-item"><Link to="/about">About</Link></li>
-            <li className="nav-item"><Link to="/tour">Tour</Link></li>
-            <li className="nav-item"><Link to="/blog">Blog</Link></li>
-            <li className="nav-item"><Link to="/contact">Contact</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/">Home</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/about">About</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/tour">Tour</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/blog">Blog</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
       </nav> 
