@@ -105,7 +105,14 @@ function Contact() {
                   <input name="phone" type="tel" className="form-control" placeholder="Phone Number" aria-label="Phone number" />
                 </div>
                 <div className="mb-3">
-                  <input name="subject" type="text" className="form-control" placeholder="Subject" aria-label="Subject" />
+                  <select name="subject" className="form-control" aria-label="Service of interest" defaultValue="" required>
+                    <option value="" disabled>Select a service</option>
+                    <option value="Tour planning">Tour planning & holiday packages</option>
+                    <option value="Flight bookings">Flight bookings</option>
+                    <option value="Hotel bookings">Hotel bookings</option>
+                    <option value="Visa assistance">Visa assistance</option>
+                    <option value="Other enquiry">Other enquiry</option>
+                  </select>
                 </div>
                 <div className="mb-3">
                   <textarea name="message" className="form-control" rows="4" placeholder="Type Your Message..." aria-label="Message" required></textarea>
