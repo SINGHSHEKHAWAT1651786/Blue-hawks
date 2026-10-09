@@ -122,6 +122,10 @@ body {
   letter-spacing: 0.01em;
 }
 
+.custom-nav .logo.navbar-brand span {
+  margin-left: 0.15em;
+}
+
 #footer-logo {
   font-family: var(--Urbanist-fonts);
 }
