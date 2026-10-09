@@ -88,14 +88,13 @@ function Index() {
             <div className="hero-content1 w-100 d-flex flex-column justify-content-center align-items-center">
               <h2 className="text-white">THE KINGDOM OF ICE</h2>
               <h1 className="text-white">Greenland</h1>
-              {/* Learn more link  */}
               <Link
-  to="/blog"                                       
-  className="btn text-white hero-btn mt-5 d-inline-flex align-items-center text-decoration-none"
->
-  LEARN MORE
-  <img src={btnArrow} className="img-fluid ms-2" alt="arrow" />
-</Link>
+                to="/blog"
+                className="btn text-white hero-btn mt-5 d-inline-flex align-items-center text-decoration-none"
+              >
+                LEARN MORE
+                <img src={btnArrow} className="img-fluid ms-2" alt="arrow" />
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -105,9 +104,9 @@ function Index() {
             <div className="hero-content2 w-100 d-flex flex-column justify-content-center align-items-center">
               <h2 className="text-white">THE KINGDOM OF NATURE</h2>
               <h1 className="text-white">Amazon</h1>
-              <button className="btn text-white hero-btn mt-5">
+              <Link to="/blog" className="btn text-white hero-btn mt-5 d-inline-flex align-items-center text-decoration-none">
                 LEARN MORE <img src={btnArrow} className="img-fluid" alt="" />
-              </button>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -117,9 +116,9 @@ function Index() {
             <div className="hero-content3 w-100 d-flex flex-column justify-content-center align-items-center">
               <h2 className="text-white">THE KINGDOM OF PEAKS</h2>
               <h1 className="text-white">Himalayas</h1>
-              <button className="btn text-white hero-btn mt-5">
+              <Link to="/blog" className="btn text-white hero-btn mt-5 d-inline-flex align-items-center text-decoration-none">
                 LEARN MORE <img src={btnArrow} className="img-fluid" alt="" />
-              </button>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
