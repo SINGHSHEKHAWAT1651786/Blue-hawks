@@ -170,7 +170,7 @@ function DestinationDetails() {
                 </p>
                 <p className="mb-4">
                   Contact us directly at{" "}
-                  <a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a> or{" "}
+                  <a href={`tel:${contactDetails.phoneLink}`}>{contactDetails.phone}</a> or{" "}
                   <a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a>.
                 </p>
 

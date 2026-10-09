@@ -35,7 +35,7 @@ function Footer() {
                                 </div>
                             </div>
                             <div className=" col-md-3">
-                                <p><i className="fas fa-phone-alt me-2"></i><a className="text-dark text-decoration-none" href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a></p>
+                                <p><i className="fas fa-phone-alt me-2"></i><a className="text-dark text-decoration-none" href={`tel:${contactDetails.phoneLink}`}>{contactDetails.phone}</a></p>
                                 <p><i className="fas fa-envelope me-2"></i><a className="text-dark text-decoration-none" href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></p>
                                 <p><i className="fas fa-map-marker-alt me-2"></i>{contactDetails.address}</p>
                                 <div className="footer-social footer-icons mt-3">

@@ -34,11 +34,10 @@ function ToursDetails() {
   const galleryImages = [
     ...new Set([imageUrl, ...additionalTripImages]),
   ];
-  const whatsappNumber = `91${contactDetails.phone.replace(/\D/g, '')}`;
   const whatsappMessage = encodeURIComponent(
     `Hi BlueHawks, I'm interested in the ${tour.name} trip in ${tour.location}. Please share more details.`
   );
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/${contactDetails.whatsappNumber}?text=${whatsappMessage}`;
 
   const facts = [
     { icon: "bi-calendar2-week", label: "Duration", value: tour.days },
@@ -195,7 +194,7 @@ function ToursDetails() {
                 </p>
                 <p className="mb-4">
                   Prefer to contact us directly? Call{" "}
-                  <a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a> or email{" "}
+                  <a href={`tel:${contactDetails.phoneLink}`}>{contactDetails.phone}</a> or email{" "}
                   <a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a>.
                 </p>
                 <form
@@ -212,7 +211,7 @@ function ToursDetails() {
                       'Message:',
                       formData.get('message') || '',
                     ].join('\n');
-                    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    const url = `https://wa.me/${contactDetails.whatsappNumber}?text=${encodeURIComponent(message)}`;
                     window.open(url, '_blank', 'noopener,noreferrer');
                   }}
                 >

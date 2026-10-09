@@ -4427,6 +4427,11 @@ textarea.form-control {
     padding: 1rem;
   }
 
+  .contact-section .row.g-5 {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   .contact-info .info-text p {
     overflow-wrap: anywhere;
   }

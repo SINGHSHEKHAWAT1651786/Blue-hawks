@@ -56,7 +56,7 @@ function Services() {
               thoughtful travel team. Tell us where you want to go.
             </p>
             <div className="travel-services-hero-actions">
-              <a className="travel-services-primary-link travel-service-button custom-btn1" href={`tel:${contactDetails.phone}`}>
+              <a className="travel-services-primary-link travel-service-button custom-btn1" href={`tel:${contactDetails.phoneLink}`}>
                 <span><i className="bi bi-telephone" aria-hidden="true"></i> Talk to our team</span>
               </a>
               <a className="travel-services-secondary-link" href="#travel-services-list">
@@ -115,7 +115,7 @@ function Services() {
                     <h3>{service.title}</h3>
                     <p>{service.description}</p>
                     <div className="travel-service-actions">
-                      <a className="travel-service-button custom-btn1" href={`tel:${contactDetails.phone}`}>
+                      <a className="travel-service-button custom-btn1" href={`tel:${contactDetails.phoneLink}`}>
                         <span><i className="bi bi-telephone" aria-hidden="true"></i> Call us</span>
                       </a>
                       <a
@@ -137,7 +137,7 @@ function Services() {
               <h2>Let’s plan the details together.</h2>
             </div>
             <div className="travel-services-contact-actions">
-              <a className="travel-service-button custom-btn1" href={`tel:${contactDetails.phone}`}>
+              <a className="travel-service-button custom-btn1" href={`tel:${contactDetails.phoneLink}`}>
                 <span><i className="bi bi-telephone" aria-hidden="true"></i> {contactDetails.phone}</span>
               </a>
               <a className="travel-service-button custom-btn1" href={`mailto:${contactDetails.email}`}>

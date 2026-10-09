@@ -67,7 +67,7 @@ function Contact() {
                 </div>
                 <div className="info-text">
                   <h5>Phone Number</h5>
-                  <p><a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a></p>
+                  <p><a href={`tel:${contactDetails.phoneLink}`}>{contactDetails.phone}</a></p>
                 </div>
               </div>
 
