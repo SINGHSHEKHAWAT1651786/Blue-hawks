@@ -58,7 +58,7 @@ function Nav() {
               objectFit: "contain",
             }}
           />
-          Blue<span>Hawks</span>
+          Blue <span>Hawks</span>
         </Link>
 
           <div className="d-flex align-items-center">
