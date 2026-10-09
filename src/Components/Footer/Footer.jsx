@@ -41,6 +41,7 @@ function Footer() {
                                 <p><i className="fas fa-map-marker-alt me-2"></i>{contactDetails.address}</p>
                                 <div className="footer-social footer-icons mt-3">
                                     <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.instagram.com/bluehawks_travelwithease/" className="text-dark text-decoration-none me-3" target="_blank" rel="noopener noreferrer" aria-label="Visit Blue Hawks on Instagram"><i className="fab fa-instagram"></i></a>
                                     <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-twitter"></i></a>
                                     <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-youtube"></i></a>
                                 </div>

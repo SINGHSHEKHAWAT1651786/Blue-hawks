@@ -607,7 +607,17 @@ function Index() {
         <ul className="d-flex justify-content-start gap-3 list-unstyled social-icons mt-3">
           <li><i className="ri-facebook-circle-fill fs-4"></i></li>
           <li><i className="ri-youtube-fill fs-4"></i></li>
-          <li><i className="ri-instagram-fill fs-4"></i></li>
+          <li>
+            <a
+              className="icon-links"
+              href="https://www.instagram.com/bluehawks_travelwithease/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit Blue Hawks on Instagram"
+            >
+              <i className="ri-instagram-fill fs-4"></i>
+            </a>
+          </li>
           <li><i className="ri-linkedin-box-fill fs-4"></i></li>
         </ul>
       </div>
