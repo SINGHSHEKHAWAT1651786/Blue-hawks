@@ -14,7 +14,6 @@ import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 
 import about1 from './../../assets/about-image-1.webp';
-import about2 from './../../assets/about-image-2.webp';
 import checkImg from './../../assets/about-check.svg';
 
 import tst1 from './../../assets/tst-1.webp';
@@ -238,9 +237,13 @@ function Index() {
               <div className="row about-cols">
                 {/* Left Image Column */}
                 <div className="col-md-6">
-                  <div className="about-col-img position-relative">
-                    <i className="bi bi-play-fill position-absolute"></i>
-                    <img src={about2} className="img-fluid" alt="About Blue Hawks - Travel With Ease" />
+                  <div className="about-promo-reel">
+                    <iframe
+                      src="/blue-hawks-promo-reel.html"
+                      title="Blue Hawks company promo reel"
+                      loading="lazy"
+                      sandbox="allow-scripts"
+                    />
                   </div>
                 </div>
                 {/* Right Check Features Column */}
