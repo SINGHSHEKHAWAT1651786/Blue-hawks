@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {  Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -11,11 +11,75 @@ import galleryimage3 from '../../assets/gallery-image3.webp';
 import galleryimage4 from '../../assets/gallery-image4.webp';
 import galleryimage5 from '../../assets/gallery-image5.webp';
 import Datas from '../../Destination.json';
+
+const filterGroups = [
+    { label: "Destination", key: "location" },
+    { label: "Activities", key: "activities" },
+    { label: "Trip Type", key: "tripType" },
+];
+
+const getFilterOptions = (key) => [
+    ...new Set(
+        Datas.flatMap((tour) => {
+            const value = tour[key];
+            return Array.isArray(value) ? value : [value];
+        }).filter(Boolean)
+    ),
+].sort();
+
 function Tour() {
+    const [filters, setFilters] = useState({
+        location: [],
+        activities: [],
+        tripType: [],
+    });
+    const [sortBy, setSortBy] = useState("featured");
+
+    const toggleFilter = (key, value) => {
+        setFilters((currentFilters) => {
+            const selectedValues = currentFilters[key];
+            return {
+                ...currentFilters,
+                [key]: selectedValues.includes(value)
+                    ? selectedValues.filter((selectedValue) => selectedValue !== value)
+                    : [...selectedValues, value],
+            };
+        });
+    };
+
+    const filteredTours = Datas.filter((tour) =>
+        filterGroups.every(({ key }) => {
+            const selectedValues = filters[key];
+            if (selectedValues.length === 0) return true;
+
+            const tourValues = Array.isArray(tour[key]) ? tour[key] : [tour[key]];
+            return selectedValues.some((value) => tourValues.includes(value));
+        })
+    );
+
+    const sortedTours = [...filteredTours].sort((firstTour, secondTour) => {
+        switch (sortBy) {
+            case "name":
+                return firstTour.name.localeCompare(secondTour.name);
+            case "price-low":
+                return Number(firstTour.price.replace(/[^0-9.]/g, "")) -
+                    Number(secondTour.price.replace(/[^0-9.]/g, ""));
+            case "price-high":
+                return Number(secondTour.price.replace(/[^0-9.]/g, "")) -
+                    Number(firstTour.price.replace(/[^0-9.]/g, ""));
+            case "duration-short":
+                return Number.parseInt(firstTour.days, 10) - Number.parseInt(secondTour.days, 10);
+            case "duration-long":
+                return Number.parseInt(secondTour.days, 10) - Number.parseInt(firstTour.days, 10);
+            default:
+                return firstTour.id - secondTour.id;
+        }
+    });
+
     return (
         <>
             {/* About Section  */}
-            <div className="section-banner w-100">
+            <div className="section-banner section-banner--tour w-100">
                 <div className="container">
                     <div className="section-banner-content ">
                         <h2>Trip Search Result</h2>
@@ -38,163 +102,69 @@ function Tour() {
                             <div className="tour-cate-wrap">
                                 <div className="tour-cate-col pb-3 border-bottom d-flex gap-5 justify-content-between">
                                     <h2>Criteria</h2>
-                                    <button className="btn">Clear All</button>
+                                    <button
+                                        className="btn"
+                                        type="button"
+                                        onClick={() => setFilters({ location: [], activities: [], tripType: [] })}
+                                    >
+                                        Clear All
+                                    </button>
                                 </div>
-                                <div className="tour-cate-box-wrap rounded pb-4 mt-5">
-                                    <div className="tour-cate-box">
-                                        <h2>Destination</h2>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
+                                {filterGroups.map(({ label, key }) => (
+                                    <div className="tour-cate-box-wrap rounded pb-4 mt-5" key={key}>
+                                        <div className="tour-cate-box">
+                                            <h2>{label}</h2>
+                                            {getFilterOptions(key).map((value) => {
+                                                const count = Datas.filter((tour) => {
+                                                    const tourValues = Array.isArray(tour[key]) ? tour[key] : [tour[key]];
+                                                    return tourValues.includes(value);
+                                                }).length;
+
+                                                return (
+                                                    <div className="tour-cate-option d-flex justify-content-between border-bottom p-2" key={value}>
+                                                        <label className="d-flex align-items-center gap-2">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={filters[key].includes(value)}
+                                                                onChange={() => toggleFilter(key, value)}
+                                                            />
+                                                            {value}
+                                                        </label>
+                                                        <span aria-label={`${count} trips`}>{count}</span>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                </div>
-                                <div className="tour-cate-box-wrap rounded pb-4 mt-5">
-                                    <div className="tour-cate-box">
-                                        <h2>Activities</h2>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Boating
-                                            </label>
-                                            <span>7</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                City
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Kayaking
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Nayagr Fall
-                                            </label>
-                                            <span>7</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tour-cate-box-wrap rounded pb-4 mt-5">
-                                    <div className="tour-cate-box">
-                                        <h2>Trip Type</h2>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Luxry
-                                            </label>
-                                            <span>7</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Perimum
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Elite
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Nayagr Fall
-                                            </label>
-                                            <span>7</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                        <div className="tour-cate-option d-flex justify-content-between border-bottom p-2">
-                                            <label className="d-flex align-items-center gap-2">
-                                                <input type="checkbox" />
-                                                Canada
-                                            </label>
-                                            <span>2</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
 
                         </div>
                         <div className="col-lg-8 ps-4 ps-lg-5">
                             <div className="row">
-                                <div className="col-lg-12 border rounded p-3 d-flex align-items-center. justify-content-end gap-3">
-                                    <span className="fs-4">Sort:</span>
-                                    <i className="bi bi-card-list tour-grid-icon fs-3"></i>
-                                    <i className="bi bi-grid-3x3 tours-grid-icon fs-3"></i>
+                                <div className="col-lg-12 border rounded p-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
+                                    <span className="fs-5">{filteredTours.length} trips found</span>
+                                    <label className="d-flex align-items-center gap-2 mb-0">
+                                        <span className="fs-6">Sort by:</span>
+                                        <select
+                                            className="form-select"
+                                            value={sortBy}
+                                            onChange={(event) => setSortBy(event.target.value)}
+                                            aria-label="Sort trips"
+                                        >
+                                            <option value="featured">Featured</option>
+                                            <option value="name">Name (A–Z)</option>
+                                            <option value="price-low">Price (low to high)</option>
+                                            <option value="price-high">Price (high to low)</option>
+                                            <option value="duration-short">Duration (shortest first)</option>
+                                            <option value="duration-long">Duration (longest first)</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </div>
                             <div className="row tours-grid mt-4">
-                                {
-                                    Datas.map(Data => (
+                                {sortedTours.length > 0 ? (
+                                    sortedTours.map(Data => (
                                         <div className="col-lg-6 mb-4" key={Data.id}>
                                             <div className="tour-card shadow-sm">
                                                 <div className="tour-card-img">
@@ -205,6 +175,7 @@ function Tour() {
                                                     <Link to={`/Tour-details/${Data.id}`} state={{ tours: Data }} className="text-black text-decoration-none"><h2>{Data.name}</h2></Link>
                                                     <div className="tour-card-box border-top py-3 d-flex justify-content-between gap-2 mt-3">
                                                         <p><i className="bi bi-clock-history"></i>{Data.days}</p>
+                                                        <p className="mb-0 fw-bold">{Data.price.startsWith("$") ? Data.price : `$${Data.price}`}</p>
                                                         <Link to={`/Tour-details/${Data.id}`} state={{ tours: Data }}>
   View-Details
 </Link>
@@ -213,7 +184,9 @@ function Tour() {
                                             </div>
                                         </div>
                                     ))
-                                }
+                                ) : (
+                                    <p className="col-12 text-center py-5">No trips match the selected filters.</p>
+                                )}
                             </div>
                         </div>
                     </div>

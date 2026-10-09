@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import contactDetails from '../../contactDetails';
 
 const destinationimage1 = "/Images/Destination-8.webp";
 const destinationimage2 = "/Images/Destination-image-4.webp";
@@ -165,7 +166,12 @@ function DestinationDetails() {
                 <h5 className="mb-4 fs-3">You can send an enquiry via the form below.</h5>
                 <p className="mb-3">
                   <strong className="fs-6">Trip name:</strong>{" "}
-                  <span className="text-danger">*</span> New York, USA
+                  <span className="text-danger">*</span> New York, USA
+                </p>
+                <p className="mb-4">
+                  Contact us directly at{" "}
+                  <a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a> or{" "}
+                  <a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a>.
                 </p>
 
                 <form className="destination-details-form">

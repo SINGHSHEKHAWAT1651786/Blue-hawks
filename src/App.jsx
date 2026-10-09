@@ -9,10 +9,16 @@ import DestinationDetails from './Components/Page/Destination-details';
 import ToursDetails from './Components/Page/Tours-details';
 import Blog from './Components/Page/Blog';
 import Contact from './Components/Page/Contact';
+import Services from './Components/Page/Services';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function App() {
   const location = useLocation();  // This is now safe
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <>
@@ -27,6 +33,7 @@ function App() {
         <Route path="/Tour-details/:id" element={<ToursDetails />} />
         <Route path="/Blog" element={<Blog />} />
       <Route path="/Contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
 
       {/* Footer visible on all pages except Home */}

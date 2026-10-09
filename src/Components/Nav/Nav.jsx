@@ -21,14 +21,21 @@ function Nav() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handlePointerDown = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
         setOpen(false);
       }
     };
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
   
  return (
@@ -62,17 +69,21 @@ function Nav() {
               className="navbar-toggler"
               type="button"
               onClick={() => setOpen(!open)}
+              aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={open}
+              aria-controls="primary-navigation"
             >
 
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>
         </div>
-        <div className={`collapse navbar-collapse ${open ? "show" : ""}`}>
+        <div id="primary-navigation" className={`collapse navbar-collapse ${open ? "show" : ""}`}>
           <ul className="navbar-nav align-items-center">
             <li className="nav-item" onClick={handleClose}><Link to="/">Home</Link></li>
             <li className="nav-item" onClick={handleClose}><Link to="/about">About</Link></li>
             <li className="nav-item" onClick={handleClose}><Link to="/tour">Tour</Link></li>
+            <li className="nav-item" onClick={handleClose}><Link to="/services">Services</Link></li>
             <li className="nav-item" onClick={handleClose}><Link to="/blog">Blog</Link></li>
             <li className="nav-item" onClick={handleClose}><Link to="/contact">Contact</Link></li>
           </ul>

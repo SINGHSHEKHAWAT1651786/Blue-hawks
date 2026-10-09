@@ -1,11 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import btnArrow from '../../assets/btn-arrow.svg';
+import contactDetails from '../../contactDetails';
 
 function Contact() {
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const subject = formData.get('subject') || 'Website contact message';
+    const body = [
+      `Name: ${formData.get('name')}`,
+      `Email: ${formData.get('email')}`,
+      `Phone: ${formData.get('phone') || 'Not provided'}`,
+      '',
+      'Message:',
+      formData.get('message'),
+    ].join('\n');
+
+    window.location.href = `mailto:${contactDetails.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <>
       {/* Banner Section */}
-      <div className="section-banner w-100">
+      <div className="section-banner section-banner--contact w-100">
         <div className="container">
           <div className="section-banner-content">
             <h2>Contact</h2>
@@ -39,8 +57,7 @@ function Contact() {
                 </div>
                 <div className="info-text">
                   <h5>Office Address</h5>
-                  <p className="mb-0">Travel Agency Network 20</p>
-                  <p>Eastbourne Terrace, London W2 6LG</p>
+                  <p>{contactDetails.address}</p>
                 </div>
               </div>
 
@@ -50,8 +67,7 @@ function Contact() {
                 </div>
                 <div className="info-text">
                   <h5>Phone Number</h5>
-                  <p className="mb-0">(488) 8543-234-5434</p>
-                  <p>(488) 8543-234-5434</p>
+                  <p><a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a></p>
                 </div>
               </div>
 
@@ -61,31 +77,33 @@ function Contact() {
                 </div>
                 <div className="info-text">
                   <h5>Mail Address</h5>
-                  <p className="mb-0">info@bluehawks.com</p>
-                  <p>support@bluehawks.com</p>
+                  <p><a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></p>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
             <div className="col-lg-6">
-              <form className="contact-form">
+              <form className="contact-form" onSubmit={handleContactSubmit}>
                 <div className="mb-3">
-                  <input type="text" className="form-control" placeholder="Full Name" />
+                  <input name="name" type="text" className="form-control" placeholder="Full Name" aria-label="Full name" required />
                 </div>
                 <div className="mb-3">
-                  <input type="text" className="form-control" placeholder="Email Address" />
+                  <input name="email" type="email" className="form-control" placeholder="Email Address" aria-label="Email address" required />
                 </div>
                 <div className="mb-3">
-                  <input type="text" className="form-control" placeholder="Phone Number" />
+                  <input name="phone" type="tel" className="form-control" placeholder="Phone Number" aria-label="Phone number" />
                 </div>
                 <div className="mb-3">
-                  <input type="text" className="form-control" placeholder="Subject" />
+                  <input name="subject" type="text" className="form-control" placeholder="Subject" aria-label="Subject" />
                 </div>
                 <div className="mb-3">
-                  <textarea className="form-control" rows="4" placeholder="Type Your Message..."></textarea>
+                  <textarea name="message" className="form-control" rows="4" placeholder="Type Your Message..." aria-label="Message" required></textarea>
                 </div>
-                <button type="submit" className="btn w-100 fw-bold">Send Message Now</button>
+                <button type="submit" className="btn custom-btn1 contact-submit-btn">
+                  <span>Send Message Now</span>
+                  <img src={btnArrow} className="img-fluid ms-2" alt="" />
+                </button>
               </form>
             </div>
           </div>
@@ -102,7 +120,8 @@ function Contact() {
 
       {/* Google Maps */}
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.068701883718!2d75.7374909!3d26.9330364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db3c83587af4f%3A0xbcf404433f7e875e!2sBlue%20Hawks%20-%20Travel%20With%20Ease!5e0!3m2!1sen!2sin!4v1750707471983!5m2!1sen!2sin"
+        title="BlueHawks office location map"
+        src={`https://www.google.com/maps?q=${encodeURIComponent(`Blue Hawks - Travel With Ease, ${contactDetails.address}`)}&output=embed`}
         width="100%"
         height="500"
         style={{ border: 0 }}

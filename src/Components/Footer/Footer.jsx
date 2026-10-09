@@ -1,4 +1,5 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import contactDetails from '../../contactDetails';
 
 import ins1 from '../../assets/ins1.webp';
 import ins2 from '../../assets/ins2.webp';
@@ -13,28 +14,34 @@ function Footer() {
                     <div className="row g-4">
                         <h2 className="fw-bold mb-4">Quick Links:</h2>
                         <div className="row g-3 w-100">
-                            <div className="col-md-3">
-                                <p><i className="fas fa-check me-2"></i>Home</p>
-                                <p><i className="fas fa-check me-2"></i>Tour</p>
-                                <p><i className="fas fa-check me-2"></i>Offer</p>
-                            </div>
-                            <div className="col-md-3">
-                                <p><i className="fas fa-check me-2"></i>About Us</p>
-                                <p><i className="fas fa-check me-2"></i>Top Destination</p>
-                                <p><i className="fas fa-check me-2"></i>Tour Package</p>
-                            </div>
-                            <div className="col-md-3">
-                                <p><i className="fas fa-check me-2"></i>Help & Support</p>
-                                <p><i className="fas fa-check me-2"></i>Contact</p>
-                                <p><i className="fas fa-check me-2"></i>Our Achievement</p>
+                            <div className="col-md-9">
+                                <div className="row">
+                                    {[
+                                        { label: "Home", to: "/" },
+                                        { label: "About Us", to: "/about" },
+                                        { label: "Trip Search", to: "/tour" },
+                                        { label: "Travel Services", to: "/services" },
+                                        { label: "Destinations", to: "/destination" },
+                                        { label: "Travel Blog", to: "/blog" },
+                                        { label: "Contact", to: "/contact" },
+                                    ].map(({ label, to }) => (
+                                        <div className="col-sm-6 col-lg-4" key={to}>
+                                            <p>
+                                                <i className="fas fa-check me-2" />
+                                                <Link className="text-dark text-decoration-none" to={to}>{label}</Link>
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                             <div className=" col-md-3">
-                                <p><i className="fas fa-check me-2"></i>35435435</p>
-                                <p><i className="fas fa-check me-2"></i>bluehawkinfo@gmail.com</p>
+                                <p><i className="fas fa-phone-alt me-2"></i><a className="text-dark text-decoration-none" href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a></p>
+                                <p><i className="fas fa-envelope me-2"></i><a className="text-dark text-decoration-none" href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></p>
+                                <p><i className="fas fa-map-marker-alt me-2"></i>{contactDetails.address}</p>
                                 <div className="footer-social footer-icons mt-3">
-                                    <a href="#" className="text-dark me-3"><i className="fab fa-facebook-f"></i></a>
-                                    <a href="#" className="text-dark me-3"><i className="fab fa-twitter"></i></a>
-                                    <a href="#" className="text-dark me-3"><i className="fab fa-youtube"></i></a>
+                                    <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-facebook-f"></i></a>
+                                    <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-twitter"></i></a>
+                                    <a href="#" className="text-dark text-decoration-none me-3"><i className="fab fa-youtube"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +68,9 @@ function Footer() {
                         </div>
                     </div>
                     <div className="copyright text-center mt-4 py-3  border-top">
-                        <p className="mb-0 small">© 2024 <strong>Bluehawk</strong> - All Rights Reserved.</p>
+                        <p className="mb-0 small">
+                            © {new Date().getFullYear()} <Link to="/" className="footer-copyright-link"><strong>Bluehawk</strong></Link> - All Rights Reserved.
+                        </p>
                     </div>
                 </div>
             </footer>

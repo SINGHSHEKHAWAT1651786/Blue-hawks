@@ -1,11 +1,17 @@
 import React from 'react'
+import Datas from '../../Destination.json';
 import star from '../../assets/star.webp';
-const destinationimage1 = "/Images/Destination-6.webp";
-const destinationimage2 = "/Images/Destination-7.webp";
-const destinationimage3 = "/Images/Destination-8.webp";
+const googleReviewsUrl = 'https://www.google.com/search?q=blue+hawks+-+travel+with+ease+jaipur#lrd=0x396db3c83587af4f:0xbcf404433f7e875e,1,,,,';
+const topDestinationTrips = [
+  { id: 6, videoId: "TU0bZbY5odU" },
+  { id: 7, videoId: "0NXHAO4zSHM" },
+  { id: 8, videoId: "AQ6GmpMu5L8" },
+].map(({ id, videoId }) => ({
+  ...Datas.find((trip) => trip.id === id),
+  videoId,
+}));
 
 import travelIcon1 from '../../assets/travel-icon1.webp';
-import travelIcon2 from '../../assets/travel-icon2.webp';
 import tst1 from '../../assets/tst-1.webp';
 import tst2 from '../../assets/tst-2.webp';
 import tst3 from '../../assets/tst-3.webp';
@@ -23,7 +29,6 @@ import brandimage1 from '../../assets/brand-image1.webp';
 import brandimage2 from '../../assets/brand-image2.webp';
 import brandimage3 from '../../assets/brand-image3.webp';
 import brandimage4 from '../../assets/brand-image4.webp';
-import brandimage5 from '../../assets/brand-image5.webp';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css/effect-cards';
@@ -34,8 +39,6 @@ import price1 from '../../assets/price-1.webp';
 import price2 from '../../assets/price-2.webp';
 import price3 from '../../assets/price-3.webp';
 import price4 from '../../assets/price-4.webp';
-import price5 from '../../assets/price-5.webp';
-import price6 from '../../assets/price-6.webp';
 
 import galleryimage1 from '../../assets/gallery-image1.webp';
 import galleryimage2 from '../../assets/gallery-image2.webp';
@@ -50,7 +53,7 @@ function About() {
   return (
     <>
       {/* About Section  */}
-      <div className="section-banner w-100">
+      <div className="section-banner section-banner--about w-100">
         <div className="container">
           <div className="section-banner-content ">
             <h2>About</h2>
@@ -76,74 +79,50 @@ function About() {
                     Get To Know Us
                   </h3>
                 </div>
-                <h2>Top Destiantions</h2>
+                <h2>Top Destinations</h2>
               </div>
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item w-100">
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage1} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
+            {topDestinationTrips.map((trip) => (
+              <div className="col-lg-4 col-md-6" key={trip.id}>
+                <article className="top-destination-item w-100">
+                  <div className="top-destination-image position-relative">
+                    <img
+                      src={`/${trip.image.replace(/^\/+/, '')}`}
+                      alt={`${trip.location} destination`}
+                    />
+                    <div className="top-destination-icons">
+                      <a
+                        href={`https://www.youtube.com/watch?v=${trip.videoId}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Watch ${trip.location} travel video on YouTube`}
+                      >
+                        <i className="bi bi-play" />
+                      </a>
+                      <Link
+                        to={`/Tour-details/${trip.id}`}
+                        state={{ tours: trip }}
+                        aria-label={`View ${trip.name} trip details`}
+                      >
+                        <i className="bi bi-link-45deg" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="top-destination-content">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Rome, Italy</h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
+                  <div className="top-destination-content">
+                    <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
+                      <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
+                      <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>{trip.price}</span>
+                    </div>
+                    <div className="trip-time fs-5 d-flex justify-content-between align-items-center">
+                      <span><i className="fa-solid fa-location-arrow pe-1" />{trip.days}</span>
+                      <span>{trip.location}</span>
+                    </div>
                   </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
+                </article>
               </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item w-100">
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage2} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
-                  </div>
-                </div>
-                <div className="top-destination-content">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Rome, Italy</h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
-                  </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item w-100">
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage3} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
-                  </div>
-                </div>
-                <div className="top-destination-content">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Paris, France </h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
-                  </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -173,17 +152,21 @@ function About() {
                 </ul>
                 <div className="travel-experience-btn d-flex flex-column flex-sm-row align-items-center gap-3 mt-4">
                   <div className="btn-box">
-                    <button className="btn custom-btn1 find-more-btn">
-                      Find More
+                    <a
+                      href={googleReviewsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn custom-btn1 find-more-btn"
+                    >
+                      <span>Find More</span>
                       <img src={btnArrow} className="img-fluid ms-2" alt="Arrow Icon" />
-                    </button>
+                    </a>
                   </div>
                   <div className="travel-experience-user d-flex align-items-center ps-sm-4">
                     <img src={tst1} alt="user" />
                     <img src={tst2} alt="user" />
                     <img src={tst3} alt="user" />
                     <img src={tst4} alt="user" />
-
                     <span className="ms-2">50+</span>
                   </div>
                 </div>
@@ -331,7 +314,7 @@ function About() {
                 </div>
                 <h2 className="m-0 p-0">About Our Team</h2>
                 <p className="py-3 text-start">
-                  Blue Hawk was created with a vision — to change the way people experience travel. Today, that vision lives on in every ticket we book, every smile we send, and every journey we shape.
+                  Our team brings together thoughtful leadership, reliable operations, and creative marketing to make every BlueHawks journey easier to plan and more enjoyable to experience.
                 </p>
               </div>
             </div>
@@ -347,7 +330,7 @@ function About() {
                   <div className="ab-tst-item w-100">
                     <img src={tst3} alt="ab-tst-image" />
                     <p className="fs-5 mb-5">
-                      I create  the  Blue Hawk travel planning. So Enjoy travel with ease by client
+                      Kuldeep leads BlueHawks' vision and growth, shaping travel experiences around thoughtful planning, trusted service, and memorable journeys.
                     </p>
                     <div className="ab-tst-bottom d-flex justify-content-between align-items-center w-100">
                       <div>
@@ -363,7 +346,7 @@ function About() {
                   <div className="ab-tst-item w-100">
                     <img src={tst3} alt="ab-tst-image" />
                     <p className="fs-5 mb-5">
-                      I Manage the  Blue Hawk travel planning. So Enjoy travel with ease by client
+                      Anu oversees daily operations and trip planning, coordinating the details that help travelers enjoy a smooth, well-supported experience.
                     </p>
                     <div className="ab-tst-bottom d-flex justify-content-between align-items-center w-100">
                       <div>
@@ -378,7 +361,7 @@ function About() {
                   <div className="ab-tst-item w-100">
                     <img src={tst1} alt="ab-tst-image" />
                     <p className="fs-5 mb-5">
-                      I marketing the  Blue Hawk with style
+                      Vidhi shapes the BlueHawks brand and travel stories, helping travelers discover destinations through clear, engaging communication.
                     </p>
                     <div className="ab-tst-bottom d-flex justify-content-between align-items-center w-100">
                       <div>

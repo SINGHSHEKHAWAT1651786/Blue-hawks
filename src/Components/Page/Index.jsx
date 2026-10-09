@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -40,11 +40,30 @@ import testBG from './../../assets/test-bg.webp';
 import quote from './../../assets/quote-left.png';
 import testimg01 from './../../assets/tst-image-1.webp';
 import testimg02 from './../../assets/tst-3.webp';
-import blog1 from './../../assets/blog1.webp';
-import blog2 from './../../assets/blog2.webp';
-import blog3 from './../../assets/blog3.webp';
 import footer from './../../assets/footer.webp'
+import blogPosts from './blogPosts';
+import contactDetails from '../../contactDetails';
+
+const googleReviewSummaries = [
+  'A traveler praised the thoughtful Phuket and Krabi itinerary, smooth arrangements, and responsive help from planning through the journey home.',
+  'A Vietnam traveler highlighted a well-organized, stress-free trip, with arrangements across Hoi An, Da Nang, Hanoi, Ha Long Bay, and Ho Chi Minh City.',
+];
+
 function Index() {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterConfirmationEmail, setNewsletterConfirmationEmail] = useState('');
+
+  const handleNewsletterSubmit = (event) => {
+    event.preventDefault();
+    setNewsletterConfirmationEmail(newsletterEmail.trim());
+  };
+
+  const newsletterSubject = encodeURIComponent('BlueHawks newsletter subscription');
+  const newsletterBody = encodeURIComponent(
+    `Please subscribe this email address to the BlueHawks newsletter: ${newsletterConfirmationEmail}`
+  );
+  const newsletterMailto = `mailto:${contactDetails.email}?subject=${newsletterSubject}&body=${newsletterBody}`;
+
   return (
     <>
       {/* Hero Slider */}
@@ -105,8 +124,12 @@ function Index() {
             </div>
           </div>
         </SwiperSlide>
-        <i className="bi bi-arrow-left-short swiper-btn swiper-prev"></i>
-        <i className="bi bi-arrow-right-short swiper-btn swiper-next"></i>
+        <button type="button" className="swiper-btn swiper-prev" aria-label="Previous featured destination">
+          <i className="bi bi-arrow-left-short" aria-hidden="true"></i>
+        </button>
+        <button type="button" className="swiper-btn swiper-next" aria-label="Next featured destination">
+          <i className="bi bi-arrow-right-short" aria-hidden="true"></i>
+        </button>
       </Swiper>
 
       {/* Swiper navigation buttons */}
@@ -156,6 +179,12 @@ function Index() {
             <SplideTrack>
               {Destination.map(dest => (
                 <SplideSlide key={dest.id}>
+                  <Link
+                    to={`/Tour-details/${dest.id}`}
+                    state={{ tours: dest }}
+                    className="dest-card-link"
+                    aria-label={`View ${dest.name} trip details`}
+                  >
                   <div className="dest-card position-relative">
                     <div className="dest-img overflow-hidden rounded">
                       <img src={dest.image} className="img-fluid" alt={dest.name} />
@@ -173,13 +202,14 @@ function Index() {
                       </div>
                     </div>
                   </div>
+                  </Link>
                 </SplideSlide>
               ))}
             </SplideTrack>
           </Splide>
           <p className="text-center mt-5 fs-5">
             Want to See Our Top Destination.
-            <a href="/Destination" className="ms-1 text-decoration-underline">Click to View More</a>
+            <a href="/Destination" className="ms-1 text-decoration-underline mobile-inline-action">Click to View More</a>
           </p>
         </div>
       </div>
@@ -237,7 +267,7 @@ function Index() {
               <div className="about-bottom mt-5 d-flex gap-4">
                 <div className="btn-box">
                   <Link to='/About'className="btn custom-btn1">
-                    Learn More
+                    <span>Learn More</span>
                     <img src={btnArrow} className="img-fluid ms-2" alt="Arrow Icon" />
                   </Link>
                 </div>
@@ -376,7 +406,7 @@ function Index() {
                     <img src={plane} className="img-fluid" alt="Plane Right" />
                   </div>
 
-                  <h2>Get Special Offer</h2>
+                  <h2 className="home-offer-heading">Get Special Offer</h2>
                   <p className="text-start">
                     Embark on an unforgettable journey with our exclusive tour special offer—seize the moment and create lasting memories.
                   </p>
@@ -385,7 +415,7 @@ function Index() {
                 {/* Call-to-action Button */}
                 <div className="btn-box offer-btn mt-4">
                   <Link to='/about'className="btn custom-btn1">
-                    Learn More
+                    <span>Learn More</span>
                     <img src={btnArrow} className="img-fluid ms-1" alt="Arrow" />
                   </Link>
                 </div>
@@ -426,68 +456,39 @@ function Index() {
             loop={true}
             className='test-Swiper'
           >
-            <SwiperSlide>
-              <div className="row align-items-center">
-                <div className="col-lg-6">
-                  <div className="testimonial-img d-flex align-items-center justify-content-center">
-                    <img src={testimg01} className='img-fluid' alt="" />
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="test-content">
-                    <img src={quote} className='img-fluid test-content-img' alt="" />
-                    <p className='test-pare'>
-                      Lorem ipsum dolor amet consectetur, adipisicing elit.
-                    </p>
-                    <div className="test-stars">
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                    </div>
-                    <div className="test-user mt-3 d-flex align-items-center gap-2">
-                      <img src={testimg02} className='img-fluid' alt="" />
-                    </div>
-                    <div className="test-user-info">
-                      <h3>GOVIND SINGH</h3>
-                      <p className='m-0'>Developer at Anisant</p>
+            {googleReviewSummaries.map((review) => (
+              <SwiperSlide key={review}>
+                <div className="row align-items-center">
+                  <div className="col-lg-6">
+                    <div className="testimonial-img d-flex align-items-center justify-content-center">
+                      <img src={testimg01} className='img-fluid' alt="" />
                     </div>
                   </div>
-                </div>
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="row align-items-center">
-                <div className="col-lg-6">
-                  <div className="testimonial-img d-flex align-items-center justify-content-center">
-                    <img src={testimg01} className='img-fluid' alt="" />
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="test-content">
-                    <img src={quote} className='img-fluid test-content-img' alt="" />
-                    <p className='test-pare'>
-                      Lorem ipsum dolor amet consectetur, adipisicing elit.
-                    </p>
-                    <div className="test-stars">
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                      <i className="bi bi-star-fill"></i>
-                    </div>
-                    <div className="test-user mt-3 d-flex align-items-center gap-2">
-                      <img src={testimg02} className='img-fluid' alt="" />
-                    </div>
-                    <div className="test-user-info">
-                      <h3>GOVIND SINGH</h3>
-                      <p className='m-0'>Developer at Anisant</p>
+                  <div className="col-lg-6">
+                    <div className="test-content">
+                      <img src={quote} className='img-fluid test-content-img' alt="" />
+                      <p className='test-pare'>
+                        {review}
+                      </p>
+                      <div className="test-stars">
+                        <i className="bi bi-star-fill"></i>
+                        <i className="bi bi-star-fill"></i>
+                        <i className="bi bi-star-fill"></i>
+                        <i className="bi bi-star-fill"></i>
+                        <i className="bi bi-star-fill"></i>
+                      </div>
+                      <div className="test-user mt-3 d-flex align-items-center gap-2">
+                        <img src={testimg02} className='img-fluid' alt="" />
+                      </div>
+                      <div className="test-user-info">
+                        <h3>Google Review</h3>
+                        <p className='m-0'>Blue Hawks customer</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
       </div>
@@ -497,7 +498,7 @@ function Index() {
           <h2>BlueHawk is a World Leading Tour Booking Platform</h2>
           <div className="btn-box mt-5">
             <Link to='/contact' className="btn custom-btn1">
-              Learn More
+              <span>Learn More</span>
               <img src={btnArrow} className='img-fluid ms-2' alt="" />
             </Link>
           </div>
@@ -514,55 +515,36 @@ function Index() {
             <p>Stay informed and inspired by subscribing to our newsletter for the latest news and insightful blog post.</p>
           </div>
         </div>
-        <div className="row g-4">
-          <div className="col-lg-4 col-md-6">
-            <div className="card blog-card border-0 overflow-hidden">
-              <div className="blog-img">
-                <img src={blog1} className='card-img' alt="" />
-              </div>
-              <div className="card-img-overlay d-flex flex-column justify-content-end">
-                <span>Read More</span>
-                <div className="detail">
-                  <h5 className="card-title fw-bold">Beach Days, Long Hikes, And</h5>
-                  <p className="card-text">Emma Mark ~ April 22,2025</p>
+        <div className="row g-4 home-blog-cards">
+          {blogPosts.slice(0, 3).map((post) => (
+            <div className="col-lg-4 col-md-6" key={post.id}>
+              <Link
+                to="/blog"
+                state={{ selectedPostId: post.id }}
+                className="home-blog-card-link"
+                aria-label={`Read ${post.title}`}
+              >
+                <div className="card blog-card border-0 overflow-hidden">
+                  <div className="blog-img">
+                    <img src={post.image} className='card-img' alt={post.title} />
+                  </div>
+                  <div className="card-img-overlay d-flex flex-column justify-content-end">
+                    <span>Read More</span>
+                    <div className="detail">
+                      <h5 className="card-title fw-bold">{post.title}</h5>
+                      <p className="card-text">{post.author} ~ {post.date}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="card blog-card border-0 overflow-hidden">
-              <div className="blog-img">
-                <img src={blog2} className='card-img' alt="" />
-              </div>
-              <div className="card-img-overlay d-flex flex-column justify-content-end">
-                <span>Read More</span>
-                <div className="detail">
-                  <h5 className="card-title fw-bold">Beach Days, Long Hikes, And</h5>
-                  <p className="card-text">Emma Mark ~ April 22,2025</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="card blog-card border-0 overflow-hidden">
-              <div className="blog-img">
-                <img src={blog3} className='card-img' alt="" />
-              </div>
-              <div className="card-img-overlay d-flex flex-column justify-content-end">
-                <span>Read More</span>
-                <div className="detail">
-                  <h5 className="card-title fw-bold">Beach Days, Long Hikes, And</h5>
-                  <p className="card-text">Emma Mark ~ April 22,2025</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className="text-center mt-4">
         <p className="text-center mt-5 fs-5">
           Want to See Our Blogs.
-          <a href="/blog" className="ms-1 text-decoration-underline">Click to View More</a>
+          <a href="/blog" className="ms-1 text-decoration-underline mobile-inline-action">Click to View More</a>
         </p>
       </div>
 
@@ -575,41 +557,48 @@ function Index() {
       {/* Subscribe Section */}
       <div className="row footer-head align-items-start custom-subscribe-row">
         <div className="col-12 col-md-6 text-center text-md-start">
-          <h2 className="footer-title section-title">
+          <h2 className="footer-title">
             Join the News Letter for more update
           </h2>
         </div>
         <div className="col-12 col-md-6">
-          <div className="input-box">
+          <form className="input-box" onSubmit={handleNewsletterSubmit}>
             <input
               type="email"
+              name="email"
+              autoComplete="email"
               placeholder="Enter your Email"
               className="form-control custom-input p-3 w-100 mb-2"
+              aria-label="Email address for newsletter"
+              value={newsletterEmail}
+              onChange={(event) => setNewsletterEmail(event.target.value)}
+              required
             />
             <div className="btn-box offer-btn mt-2">
-              <button className="btn custom-btn1">
-                Subscribe
+              <button className="btn custom-btn1" type="submit">
+                <span>Subscribe</span>
                 <img src={btnArrow} className="img-fluid ms-2" alt="Arrow" />
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
       {/* Footer Info */}
       <div className="mb-4 text-start">
-        <a
-          href="#"
+        <Link
+          to="/"
           id="footer-logo"
           className="logo d-inline-block fw-bold mb-2"
           style={{
             fontSize: "1.8rem",
-            textDecoration: "underline",
+            textDecoration: "none",
             color: "#000",
           }}
         >
-          BlueHawk
-        </a>
+          Blue Hawks
+        </Link>
+        <p className="footer-brand-tagline">Travel with ease</p>
         <p className="text-muted">
           Go on a journey of unparalleled adventure with our travel agency,
           where every destination is a memory.
@@ -629,7 +618,7 @@ function Index() {
             <li><a href="#">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/about">Offers</a></li>
-            <li><a href="/tour">Services</a></li>
+            <li><a href="/services">Services</a></li>
           </ul>
         </div>
         <div className="col-12 col-md-4 mb-3 mb-md-0">
@@ -664,8 +653,55 @@ function Index() {
 
 {/* Footer Bottom */}
 <div className="footer-bottom container-fluid text-white bg-dark p-2 text-center">
-  <p className="mb-0 small">© 2024 <strong>Bluehawk</strong> - All Rights Reserved.</p>
+  <p className="mb-0 small">
+    © {new Date().getFullYear()} <Link to="/" className="home-copyright-link"><strong>Bluehawk</strong></Link> - All Rights Reserved.
+  </p>
 </div>
+
+{newsletterConfirmationEmail && (
+  <div
+    className="newsletter-modal-backdrop"
+    onClick={() => setNewsletterConfirmationEmail('')}
+  >
+    <section
+      className="newsletter-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="newsletter-modal-title"
+      onClick={(event) => event.stopPropagation()}
+    >
+      <button
+        type="button"
+        className="newsletter-modal-close"
+        aria-label="Close subscription message"
+        onClick={() => setNewsletterConfirmationEmail('')}
+      >
+        &times;
+      </button>
+      <h2 id="newsletter-modal-title">Thank you for your interest!</h2>
+      <p>
+        <strong>{newsletterConfirmationEmail}</strong> has a valid email format.
+        To request a subscription, send the prefilled email to {contactDetails.email}.
+      </p>
+      <p className="newsletter-modal-note">
+        The website cannot confirm delivery or send newsletter emails yet; no subscription
+        is recorded until BlueHawks receives and processes your request.
+      </p>
+      <div className="d-flex flex-wrap gap-2">
+        <a className="btn custom-btn1 newsletter-send-button" href={newsletterMailto}>
+          <span>Send subscription request</span>
+        </a>
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          onClick={() => setNewsletterConfirmationEmail('')}
+        >
+          Close
+        </button>
+      </div>
+    </section>
+  </div>
+)}
 
     </>
   );

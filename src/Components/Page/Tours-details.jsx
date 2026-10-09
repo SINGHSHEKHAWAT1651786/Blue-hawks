@@ -1,104 +1,124 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Datas from '../../Destination.json';
+import contactDetails from '../../contactDetails';
+import btnArrow from '../../assets/btn-arrow.svg';
 
-const destinationimage1 = "/Images/Destination-8.webp";
-const destinationimage2 = "/Images/Destination-image-4.webp";
-const destinationimage3 = "/Images/Destination-image-2.webp";
-const destinationimage4 = "/Images/Destination-image-1.webp";
+const additionalTripImages = [
+  "/Images/Destination-8.webp",
+  "/Images/Destination-image-4.webp",
+  "/Images/Destination-image-2.webp",
+  "/Images/Destination-image-1.webp",
+];
 
 function ToursDetails() {
   const { id } = useParams();
-  const tour = Datas.find(item => item.id === parseInt(id));
+  const tour = Datas.find((item) => item.id === Number(id));
+  const [selectedImage, setSelectedImage] = useState("");
 
-  if (!tour) return <p>Tour not found</p>;
+  useEffect(() => {
+    if (tour) setSelectedImage(`/${tour.image.replace(/^\/+/, '')}`);
+  }, [tour]);
 
-  const images = [
-    destinationimage1,
-    destinationimage2,
-    destinationimage3,
-    destinationimage4,
+  if (!tour) {
+    return (
+      <main className="container py-5">
+        <h1>Trip not found</h1>
+        <p>The trip may have been removed or the link may be incorrect.</p>
+        <Link to="/tour" className="btn btn-purple">Browse trips</Link>
+      </main>
+    );
+  }
+
+  const imageUrl = `/${tour.image.replace(/^\/+/, '')}`;
+  const galleryImages = [
+    ...new Set([imageUrl, ...additionalTripImages]),
   ];
+  const whatsappNumber = `91${contactDetails.phone.replace(/\D/g, '')}`;
+  const whatsappMessage = encodeURIComponent(
+    `Hi BlueHawks, I'm interested in the ${tour.name} trip in ${tour.location}. Please share more details.`
+  );
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-  const [mainImage, setMainImage] = useState(images[0]);
-  const [adultCount, setAdultCount] = useState(1);
-  const [childCount, setChildCount] = useState(1);
-
-  const priceAdult = parseInt(tour.price.replace(/\D/g, ""), 10) || 0;
-  const priceChild = parseInt(tour.price.replace(/\D/g, ""), 10) || 0;
-  const adultTotal = priceAdult * adultCount;
-  const childTotal = priceChild * childCount;
-  const total = adultTotal + childTotal;
+  const facts = [
+    { icon: "bi-calendar2-week", label: "Duration", value: tour.days },
+    { icon: "bi-cash-coin", label: "Price per traveler", value: tour.price },
+    { icon: "bi-hospital", label: "Accommodation", value: tour.accommodation },
+    { icon: "bi-airplane", label: "Arrival city", value: tour.arrivalCity },
+    { icon: "bi-calendar2-heart", label: "Best season", value: tour.bestSeason },
+    { icon: "bi-stars", label: "Trip type", value: tour.tripType },
+  ];
 
   return (
     <>
-      {/* Banner */}
-      <div className="section-banner w-100">
+      <div className="section-banner section-banner--tour w-100">
         <div className="container">
           <div className="section-banner-content">
             <h2>{tour.name}</h2>
             <ul>
               <li className="pe-2"><Link to="/">Home</Link></li>
-              <li><i className="bi bi-gear fs-5 pe-2" /> Trip Details</li>
+              <li><i className="bi bi-gear fs-5 pe-2" />Trip Details</li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Main section of desination */}
-      <div className="destination-container">
+      <main className="destination-container">
         <div className="container my-5">
-          <div className="row g-4 destination-top">
-            <div className="col-lg-2 d-flex flex-column gap-2 destination-images" style={{ overflowY: 'auto', maxHeight: '450px' }}>
-              {images.map((img, index) => (
-                <div
-                  key={`thumb-${index}`}
-                  className={`destination-details-thumb d-flex ${mainImage === img ? 'active-thumb' : ''}`}
-                  role="button"
-                  tabIndex={0}
-                  onMouseEnter={() => setMainImage(img)}
-                  onKeyDown={(e) => e.key === "Enter" && setMainImage(img)}
-                  style={{ cursor: "pointer" }}
-                >
+          <div className="row g-4 align-items-center">
+            <div className="col-12 col-lg-8">
+              <div className="tour-detail-gallery">
+                <div className="tour-detail-thumbnails" aria-label="Trip images">
+                  {galleryImages.map((image, index) => (
+                    <button
+                      key={image}
+                      type="button"
+                      className={`tour-detail-thumbnail ${selectedImage === image ? "active" : ""}`}
+                      onMouseEnter={() => setSelectedImage(image)}
+                      onFocus={() => setSelectedImage(image)}
+                      onClick={() => setSelectedImage(image)}
+                      aria-label={`Show trip image ${index + 1}`}
+                      aria-pressed={selectedImage === image}
+                    >
+                      <img src={image} alt="" />
+                    </button>
+                  ))}
+                </div>
+                <div className="tour-detail-image-wrap">
                   <img
-                    src={img}
-                    alt={`Thumbnail ${index + 1}`}
-                    className="img-fluid"
-                    style={{ height: '90px', objectFit: 'cover', borderRadius: '8px' }}
+                    src={selectedImage || imageUrl}
+                    className="tour-detail-image"
+                    alt={`${tour.location} trip, image ${galleryImages.indexOf(selectedImage) + 1}`}
                   />
                 </div>
-              ))}
+              </div>
             </div>
-
-            <div className="col-lg-6 position-relative destination-main-image h-100">
-              <img src={`/${tour.image}`} className="img-fluid w-100" alt="Selected destination" />
+            <div className="col-12 col-lg-4">
+              <span className="blog-post-category">{tour.tripType} trip</span>
+              <p className="text-secondary mt-3 mb-2">
+                <i className="bi bi-geo-alt me-2" />{tour.location}
+              </p>
+              <h1 className="fw-bold">{tour.name}</h1>
+              <p className="fs-5 text-secondary">{tour.pere}</p>
+              <p className="fs-4 fw-bold text-primary">{tour.price} <small className="fs-6 text-secondary">per traveler</small></p>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn custom-btn1 tour-enquiry-button"
+              >
+                <span>Enquire about this trip</span>
+                <img src={btnArrow} className="img-fluid ms-2" alt="" />
+              </a>
             </div>
           </div>
 
-          <h2 className="fw-bold mt-5 fs-1">{tour.name}</h2>
-          <button type="button" className="btn btn-purple fs-4 open-book-tn"
-  data-bs-toggle="modal" data-bs-target="#bookingModal">
-            Book Now
-          </button>
-
-          <div className="row">
-            <div className="col-lg-9">
-              <div className="row row-cols-2 row-cols-md-4 g-4 mt-2">
-                {[
-                  { icon: "bi-hospital", label: "Accommodation", value: "5‑Star Hotel" },
-                  { icon: "bi-ticket", label: "Admission Fee", value: "No" },
-                  { icon: "bi-airplane", label: "Arrival City", value: "London" },
-                  { icon: "bi-calendar2-heart", label: "Best Season", value: "Autumn" },
-                  { icon: "bi-geo-alt", label: "Departure City", value: "Kathmandu" },
-                  { icon: "bi-shield-check", label: "Insurance", value: "60% Covered" },
-                  { icon: "bi-chat-text", label: "Language", value: "English" },
-                  { icon: "bi-person-video", label: "Guide", value: "Included" },
-                  { icon: "bi-person-badge", label: "Min Age", value: 18 },
-                  { icon: "bi-taxi-front", label: "Hotel Transfer", value: "Available" },
-                  { icon: "bi-person-exclamation", label: "Max Age", value: 58 },
-                ].map(({ icon, label, value }) => (
+          <div className="row mt-4">
+            <div className="col-12">
+              <div className="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-4 mt-2">
+                {facts.map(({ icon, label, value }) => (
                   <div key={label} className="col d-flex align-items-center">
-                    <i className={`bi ${icon} me-3 destination-details-icon`} />
+                    <i className={`bi ${icon} me-3 destination-details-icon`} aria-hidden="true" />
                     <div className="destination-details-info">
                       {label}:<br />
                       <strong>{value}</strong>
@@ -109,127 +129,115 @@ function ToursDetails() {
             </div>
           </div>
 
-          {/* Overview */}
           <div className="row mt-5">
-            <div className="col-md-9">
-              <h2 className="fw-bold fs-1">Overview</h2>
-              <p className="fs-5">Sample description about the tour goes here. You can replace this text.</p>
-              <p className="fs-5">You can also dynamically include content about the tour from `Destination.json` later.</p>
-            </div>
+            <section className="col-12 col-lg-9">
+              <h2 className="fw-bold fs-1">Trip Overview</h2>
+              <p className="fs-5">{tour.description}</p>
+              <p>
+                Activities: {tour.activities.join(' · ')}. The itinerary and availability can vary by season;
+                confirm final arrangements with the trip provider before booking.
+              </p>
+            </section>
           </div>
 
-          {/* Highlights */}
-          <div className="row mt-5">
-            <div className="col-md-9">
-              <h2 className="fw-bold fs-1">Top Highlights</h2>
+          <div className="row mt-4">
+            <section className="col-12 col-lg-9">
+              <h2 className="fw-bold fs-1">Trip Highlights</h2>
               <ul className="list-unstyled mt-3">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <li key={i} className="fs-5 mb-1">
+                {tour.highlights.map((highlight) => (
+                  <li key={highlight} className="fs-5 mb-2">
                     <i className="bi bi-stars text-primary me-2" />
-                    Easily generate images with detailed text prompts
+                    {highlight}
                   </li>
                 ))}
               </ul>
-            </div>
+            </section>
           </div>
 
-          {/* Include / Exclude */}
-          <div className="row mt-5">
-            <div className="col-md-9">
-              <h2 className="fw-bold mb-4 fs-1">Include and Exclude</h2>
-              <div className="row">
-                {[1, 2].map((col) => (
-                  <div key={col} className="col-md-6 mb-3">
-                    <div className="bg-light p-3 rounded shadow-sm">
-                      <ul className="list-unstyled">
-                        {[
-                          "Meals as per hotel plan — drinks free too.",
-                          "Return airport and round‑trip transfers.",
-                          "Accommodation on twin‑sharing basis.",
-                        ].map((item) => (
-                          <li key={item} className="fs-5 mb-2">
-                            <i className="bi bi-check2-circle text-primary me-2" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
+          <div className="row mt-4">
+            <section className="col-12 col-lg-9">
+              <h2 className="fw-bold mb-4 fs-1">What’s Included</h2>
+              <div className="bg-light p-4 rounded shadow-sm">
+                <ul className="list-unstyled mb-0">
+                  {tour.included.map((item) => (
+                    <li key={item} className="fs-5 mb-2">
+                      <i className="bi bi-check2-circle text-primary me-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            </section>
           </div>
 
-          {/* Enquiry form */}
-          <div className="row mt-5">
-            <div className="col-md-9">
+          <div className="row mt-4">
+            <section className="col-12 col-lg-9">
+              <h2 className="fw-bold mb-4 fs-1">Not Included</h2>
+              <div className="bg-light p-4 rounded shadow-sm">
+                <ul className="list-unstyled mb-0">
+                  {tour.excluded.map((item) => (
+                    <li key={item} className="fs-5 mb-2">
+                      <i className="bi bi-dash-circle text-secondary me-2" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          </div>
+
+          <div className="row mt-5" id="trip-enquiry">
+            <div className="col-12 col-lg-9">
               <div className="form-container shadow p-4">
-                <h5 className="mb-4 fs-3">You can send an enquiry via the form below.</h5>
+                <h2 className="mb-4 fs-3">Ask about this trip</h2>
                 <p className="mb-3">
-                  <strong className="fs-6">Trip name:</strong>{" "}
-                  <span className="text-danger">*</span> {tour.name}
+                  <strong>Trip:</strong> {tour.name}
                 </p>
-
-                <form className="destination-details-form">
+                <p className="mb-4">
+                  Prefer to contact us directly? Call{" "}
+                  <a href={`tel:${contactDetails.phone}`}>{contactDetails.phone}</a> or email{" "}
+                  <a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a>.
+                </p>
+                <form
+                  className="destination-details-form"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    const formData = new FormData(event.currentTarget);
+                    const message = [
+                      'Hi BlueHawks, I would like to enquire about this trip.',
+                      `Trip: ${tour.name}`,
+                      `Name: ${formData.get('name')}`,
+                      `Email: ${formData.get('email')}`,
+                      '',
+                      'Message:',
+                      formData.get('message') || '',
+                    ].join('\n');
+                    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                  }}
+                >
                   <div className="mb-3">
-                    <label className="form-label required">Full Name</label>
-                    <input type="text" className="form-control" placeholder="Enter your name" required />
+                    <label className="form-label" htmlFor="trip-enquiry-name">Full name</label>
+                    <input id="trip-enquiry-name" name="name" type="text" className="form-control" placeholder="Enter your name" required />
                   </div>
-
                   <div className="mb-3">
-                    <label className="form-label required">Email</label>
-                    <input type="email" className="form-control" placeholder="Enter your email" required />
+                    <label className="form-label" htmlFor="trip-enquiry-email">Email</label>
+                    <input id="trip-enquiry-email" name="email" type="email" className="form-control" placeholder="Enter your email" required />
                   </div>
-
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Country</label>
-                      <select className="form-select" defaultValue="">
-                        <option value="" disabled>Choose a country</option>
-                        {["USA", "UK", "India", "Canada"].map((c) => (
-                          <option key={c} value={c}>{c}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Contact Number</label>
-                      <input type="tel" className="form-control" placeholder="Enter your contact" />
-                    </div>
-                  </div>
-
-                  <div className="row g-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="form-label">No. of Adults</label>
-                      <input type="number" className="form-control" min="1" placeholder="Adults" />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">No. of Children</label>
-                      <input type="number" className="form-control" min="0" placeholder="Children" />
-                    </div>
-                  </div>
-
                   <div className="mb-3">
-                    <label className="form-label">Enquiry Subject</label>
-                    <input type="text" className="form-control" placeholder="Enquiry subject" />
+                    <label className="form-label" htmlFor="trip-enquiry-message">Message</label>
+                    <textarea id="trip-enquiry-message" name="message" className="form-control w-100" placeholder="Tell us about your travel plans" />
                   </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Your Message</label>
-                    <textarea className="form-control w-100" placeholder="Enter your message" />
-                  </div>
-
-                  <div className="text-center">
-                    <button type="submit" className="btn btn-purple px-5 py-2">
-                      Send Email
-                    </button>
-                  </div>
+                  <button type="submit" className="btn custom-btn1 trip-enquiry-submit">
+                    <span>Send enquiry</span>
+                    <img src={btnArrow} className="img-fluid ms-2" alt="" />
+                  </button>
                 </form>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
+      </main>
     </>
   );
 }

@@ -1,32 +1,28 @@
 import React from "react";
 import star from '../../assets/star.webp';
-import { Link } from 'react-router-dom'; 
+import Datas from '../../Destination.json';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import '@splidejs/react-splide/css';
 
-const destinationimage1 = "/Images/Destination-6.webp";
-const destinationimage2 = "/Images/Destination-7.webp";
-const destinationimage3 = "/Images/Destination-8.webp";
+const topDestinationTrips = [1, 2, 3, 4, 5, 9]
+  .map((id) => Datas.find((destination) => destination.id === id))
+  .filter(Boolean);
 
 import brandimage1 from '../../assets/brand-image1.webp';
 import brandimage2 from '../../assets/brand-image2.webp';
 import brandimage3 from '../../assets/brand-image3.webp';
 import brandimage4 from '../../assets/brand-image4.webp';
-import brandimage5 from '../../assets/brand-image5.webp';
 
 import galleryimage1 from '../../assets/gallery-image1.webp';
 import galleryimage2 from '../../assets/gallery-image2.webp';
 import galleryimage3 from '../../assets/gallery-image3.webp';
 import galleryimage4 from '../../assets/gallery-image4.webp';
 import galleryimage5 from '../../assets/gallery-image5.webp';
-import btnArrow from '../../assets/btn-arrow.svg';
 
 function Destination(){
 
@@ -64,75 +60,46 @@ function Destination(){
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item w-100">
-                <Link to='/Destination-details'>
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage1} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
+            {topDestinationTrips.map((trip) => (
+              <div className="col-lg-4 col-md-6" key={trip.id}>
+                <article className="top-destination-item w-100">
+                  <div className="top-destination-image position-relative">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${trip.image.replace(/^\/+/, '')}`}
+                      alt={`${trip.location} destination`}
+                    />
+                    <div className="top-destination-icons">
+                      <a
+                        href={`https://www.youtube.com/results?search_query=${encodeURIComponent(`${trip.name} travel`)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Search for ${trip.name} travel videos on YouTube`}
+                      >
+                        <i className="bi bi-play" />
+                      </a>
+                      <Link
+                        to={`/Tour-details/${trip.id}`}
+                        state={{ tours: trip }}
+                        aria-label={`View ${trip.name} trip details`}
+                      >
+                        <i className="bi bi-link-45deg" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-                <div className="top-destination-content">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Rome, Italy</h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
+                  <div className="top-destination-content">
+                    <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
+                      <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
+                      <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>{trip.price}</span>
+                    </div>
+                    <div className="trip-time fs-5 d-flex justify-content-between align-items-center">
+                      <span><i className="fa-solid fa-location-arrow pe-1" />{trip.days}</span>
+                      <span>{trip.location}</span>
+                    </div>
+                    <p className="destination-card-description">{trip.pere}</p>
                   </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
-                </Link>
+                </article>
               </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item">
-                <Link to='/Destination-details'>
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage2} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
-                  </div>
-                </div>
-                <div className="top-destination-content shadown">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Rome, Italy</h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
-                  </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
-                </Link>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="top-destination-item w-100">
-                <Link to='/Destination-details'>
-                <div className="top-destination-image position-relative">
-                  <img src={destinationimage3} alt="destination-image" />
-                  <div className="top-destination-icons">
-                    <i className="bi bi-play"></i>
-                    <i className="bi bi-link-45deg"></i>
-                  </div>
-                </div>
-                <div className="top-destination-content shadown">
-                  <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                    <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>Paris, France </h3>
-                    <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>$0</span>
-                  </div>
-                  <div className="trip-time fs-5">
-                    <i className="fa-solid fa-location-arrow pe-1"></i>
-                    4 days
-                  </div>
-                </div>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
