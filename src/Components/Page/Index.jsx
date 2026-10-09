@@ -229,8 +229,9 @@ function Index() {
                   {/* TITLE */}
                   <h2 className="mb-3">This is travel — with ease</h2>
                   <p>
-                    BlueHawk isn’t just a travel company — we blend culture, taste, and a touch of
-                    wanderlust to turn every journey into a story worth telling.
+                    Blue Hawks - Travel With Ease is a Jaipur-based travel company for thoughtful
+                    domestic and international journeys. We bring culture, local experiences, and
+                    careful planning together to make every trip easier.
                   </p>
                 </div>
               </div>
@@ -239,7 +240,7 @@ function Index() {
                 <div className="col-md-6">
                   <div className="about-col-img position-relative">
                     <i className="bi bi-play-fill position-absolute"></i>
-                    <img src={about2} className="img-fluid" alt="About BlueHawk" />
+                    <img src={about2} className="img-fluid" alt="About Blue Hawks - Travel With Ease" />
                   </div>
                 </div>
                 {/* Right Check Features Column */}
@@ -495,7 +496,7 @@ function Index() {
       {/* Banners  */}
       <div className="blog-banner py-5 container-fluid d-flex justify-content-center align-items-center">
         <div className="container banner-title section-title d-flex text-center">
-          <h2>BlueHawk is a World Leading Tour Booking Platform</h2>
+          <h2>Plan your next journey with Blue Hawks - Travel With Ease</h2>
           <div className="btn-box mt-5">
             <Link to='/contact' className="btn custom-btn1">
               <span>Learn More</span>

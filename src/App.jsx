@@ -21,8 +21,8 @@ function App() {
     const path = location.pathname.toLowerCase();
     const pageMetadata = {
       '/': {
-        title: 'Blue Hawks - Travel With Ease | BlueHawks Travel',
-        description: 'Blue Hawks (BlueHawks Travel) is a Jaipur travel agency for domestic and international tours, flights, hotels, and visa assistance. Plan your trip with us.',
+        title: 'Blue Hawks - Travel With Ease',
+        description: 'Blue Hawks - Travel With Ease is a Jaipur travel company offering thoughtful domestic and international journeys, tours, flights, hotels, and visa assistance.',
       },
       '/about': {
         title: 'About Blue Hawks | BlueHawks Travel, Jaipur',
@@ -63,8 +63,8 @@ function App() {
           description: 'View holiday package details and enquire about your next trip with Blue Hawks Travel.',
         }
       : pageMetadata[path] ?? {
-          title: 'Blue Hawks - Travel With Ease | BlueHawks Travel',
-          description: 'Plan domestic and international holidays with Blue Hawks Travel, a travel agency based in Jaipur, India.',
+          title: 'Blue Hawks - Travel With Ease',
+          description: 'Plan thoughtful domestic and international journeys with Blue Hawks - Travel With Ease, a Jaipur travel company.',
         };
 
     document.title = metadata.title;

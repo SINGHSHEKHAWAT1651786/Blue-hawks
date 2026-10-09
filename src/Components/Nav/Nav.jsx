@@ -51,7 +51,7 @@ function Nav() {
         <Link to="/" className="logo navbar-brand d-flex align-items-center">
           <img
             src={scrolled ? colorLogo : whiteLogo}
-            alt="BlueHawk logo"
+            alt="Blue Hawks - Travel With Ease logo"
             style={{
               height: "60px",
               marginLeft: "-50px",

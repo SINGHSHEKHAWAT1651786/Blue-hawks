@@ -314,7 +314,7 @@ function About() {
                 </div>
                 <h2 className="m-0 p-0">About Our Team</h2>
                 <p className="py-3 text-start">
-                  Our team brings together thoughtful leadership, reliable operations, and creative marketing to make every BlueHawks journey easier to plan and more enjoyable to experience.
+                  Our team brings together thoughtful leadership, reliable operations, and creative marketing to make every Blue Hawks journey easier to plan and more enjoyable to experience.
                 </p>
               </div>
             </div>
@@ -330,11 +330,11 @@ function About() {
                   <div className="ab-tst-item w-100">
                     <img src={tst3} alt="ab-tst-image" />
                     <p className="fs-5 mb-5">
-                      Kuldeep leads BlueHawks' vision and growth, shaping travel experiences around thoughtful planning, trusted service, and memorable journeys.
+                      Kuldeep leads Blue Hawks' vision and growth, shaping travel experiences around thoughtful planning, trusted service, and memorable journeys.
                     </p>
                     <div className="ab-tst-bottom d-flex justify-content-between align-items-center w-100">
                       <div>
-                        <h3>Kuldeep Singh</h3>
+                        <h3>Kuldeep Singh Rajawat</h3>
                         <span>CEO</span>
                       </div>
                       <button className="btn custom-swipe-btn">Swipe</button>
@@ -361,7 +361,7 @@ function About() {
                   <div className="ab-tst-item w-100">
                     <img src={tst1} alt="ab-tst-image" />
                     <p className="fs-5 mb-5">
-                      Vidhi shapes the BlueHawks brand and travel stories, helping travelers discover destinations through clear, engaging communication.
+                      Vidhi shapes the Blue Hawks brand and travel stories, helping travelers discover destinations through clear, engaging communication.
                     </p>
                     <div className="ab-tst-bottom d-flex justify-content-between align-items-center w-100">
                       <div>

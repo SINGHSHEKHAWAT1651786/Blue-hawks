@@ -53,6 +53,16 @@ function Contact() {
             <div className="col-lg-6 contact-info d-flex flex-column justify-content-center">
               <div className="info-block d-flex mb-4">
                 <div className="info-icon me-3">
+                  <i className="fas fa-user"></i>
+                </div>
+                <div className="info-text">
+                  <h5>Contact Person</h5>
+                  <p>{contactDetails.name}</p>
+                </div>
+              </div>
+
+              <div className="info-block d-flex mb-4">
+                <div className="info-icon me-3">
                   <i className="fas fa-map-marker-alt"></i>
                 </div>
                 <div className="info-text">
