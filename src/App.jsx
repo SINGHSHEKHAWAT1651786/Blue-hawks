@@ -18,6 +18,69 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const path = location.pathname.toLowerCase();
+    const pageMetadata = {
+      '/': {
+        title: 'Blue Hawks - Travel With Ease | BlueHawks Travel',
+        description: 'Blue Hawks (BlueHawks Travel) is a Jaipur travel agency for domestic and international tours, flights, hotels, and visa assistance. Plan your trip with us.',
+      },
+      '/about': {
+        title: 'About Blue Hawks | BlueHawks Travel, Jaipur',
+        description: 'Meet Blue Hawks, a Jaipur travel team helping travelers plan thoughtful domestic and international holidays.',
+      },
+      '/tour': {
+        title: 'Tours & Holiday Packages | Blue Hawks Travel',
+        description: 'Explore domestic and international holiday packages with Blue Hawks. Find a trip that fits your travel style.',
+      },
+      '/tour-details': {
+        title: 'Trip Details | Blue Hawks Travel',
+        description: 'Explore trip details and plan your next holiday with Blue Hawks Travel.',
+      },
+      '/destination': {
+        title: 'Top Travel Destinations | Blue Hawks Travel',
+        description: 'Discover featured destinations and plan your next holiday with Blue Hawks Travel in Jaipur.',
+      },
+      '/destination-details': {
+        title: 'Destination Details | Blue Hawks Travel',
+        description: 'Explore destination highlights and start planning your next trip with Blue Hawks Travel.',
+      },
+      '/blog': {
+        title: 'Travel Blog & Guides | Blue Hawks Travel',
+        description: 'Read travel inspiration, destination guides, and trip-planning tips from Blue Hawks Travel.',
+      },
+      '/contact': {
+        title: 'Contact Blue Hawks Travel | Jaipur Travel Agency',
+        description: 'Contact Blue Hawks Travel in Vaishali Nagar, Jaipur, for tour planning, flights, hotels, and visa assistance.',
+      },
+      '/services': {
+        title: 'Travel Services | Blue Hawks Travel, Jaipur',
+        description: 'Get help with flight bookings, hotel stays, visa assistance, and holiday planning from Blue Hawks Travel.',
+      },
+    };
+    const metadata = path.startsWith('/tour-details/')
+      ? {
+          title: 'Trip Details | Blue Hawks Travel',
+          description: 'View holiday package details and enquire about your next trip with Blue Hawks Travel.',
+        }
+      : pageMetadata[path] ?? {
+          title: 'Blue Hawks - Travel With Ease | BlueHawks Travel',
+          description: 'Plan domestic and international holidays with Blue Hawks Travel, a travel agency based in Jaipur, India.',
+        };
+
+    document.title = metadata.title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', metadata.description);
+    document.querySelector('link[rel="canonical"]')?.setAttribute(
+      'href',
+      `https://www.blue-hawks.com${location.pathname}`,
+    );
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', metadata.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', metadata.description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute(
+      'content',
+      `https://www.blue-hawks.com${location.pathname}`,
+    );
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', metadata.title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', metadata.description);
   }, [location.pathname]);
 
   return (
