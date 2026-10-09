@@ -4,7 +4,7 @@ import contactDetails from '../../contactDetails';
 import ins1 from '../../assets/ins1.webp';
 import ins2 from '../../assets/ins2.webp';
 import ins3 from '../../assets/ins3.webp';
-import ins4 from '../../assets/ins3.webp';
+import ins4 from '../../assets/ins4.webp';
 import ins5 from '../../assets/ins5.webp';
 function Footer() {
     return (
