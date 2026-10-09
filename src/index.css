@@ -4314,6 +4314,17 @@ textarea.form-control {
 }
 
 /* Social Icons */
+.contact-icons .contact-icon-link {
+  width: 25%;
+  height: 80px;
+  text-decoration: none;
+}
+
+.contact-icons .contact-icon-link i {
+  width: 100%;
+  height: 100%;
+}
+
 .contact-icons i {
   width: 25%;
   height: 80px;

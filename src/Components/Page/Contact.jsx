@@ -121,7 +121,15 @@ function Contact() {
           {/* Social Icons */}
           <div className="contact-icons d-flex gap-3 mt-4">
             <i className="fab fa-facebook-f"></i>
-            <i className="fab fa-instagram"></i>
+            <a
+              className="contact-icon-link text-decoration-none"
+              href="https://www.instagram.com/bluehawks_travelwithease/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit Blue Hawks on Instagram"
+            >
+              <i className="fab fa-instagram"></i>
+            </a>
             <i className="fab fa-pinterest-p"></i>
             <i className="fab fa-linkedin-in"></i>
           </div>
