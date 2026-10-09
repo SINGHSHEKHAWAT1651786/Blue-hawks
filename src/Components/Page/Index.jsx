@@ -241,8 +241,7 @@ function Index() {
                     <iframe
                       src="/blue-hawks-promo-reel.html"
                       title="Blue Hawks company promo reel"
-                      loading="lazy"
-                      sandbox="allow-scripts"
+                      loading="eager"
                     />
                   </div>
                 </div>
