@@ -661,7 +661,7 @@ function Index() {
 {/* Footer Bottom */}
 <div className="footer-bottom container-fluid text-white bg-dark p-2 text-center">
   <p className="mb-0 small">
-    © {new Date().getFullYear()} <Link to="/" className="home-copyright-link"><strong>Bluehawk</strong></Link> - All Rights Reserved.
+    © {new Date().getFullYear()} <Link to="/" className="home-copyright-link"><strong>Blue Hawks</strong></Link> - All Rights Reserved.
   </p>
 </div>
 

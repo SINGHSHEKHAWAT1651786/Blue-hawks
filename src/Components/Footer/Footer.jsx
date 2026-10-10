@@ -71,7 +71,7 @@ function Footer() {
                     </div>
                     <div className="copyright text-center mt-4 py-3  border-top">
                         <p className="mb-0 small">
-                            © {new Date().getFullYear()} <Link to="/" className="footer-copyright-link"><strong>Bluehawk</strong></Link> - All Rights Reserved.
+                            © {new Date().getFullYear()} <Link to="/" className="footer-copyright-link"><strong>Blue Hawks</strong></Link> - All Rights Reserved.
                         </p>
                     </div>
                 </div>
