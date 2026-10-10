@@ -803,22 +803,65 @@ body {
   transition: var(--transition-regular);
 }
 
+.package-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.package-contact-message {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #000;
+  font-weight: 700;
+}
+
+.package-contact-link:hover {
+  text-decoration: underline;
+}
+
+.top-destination-contact {
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 105, 0, 1), rgba(207, 46, 46, 1));
+  color: var(--white);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.top-destination-item:hover .top-destination-contact,
+.top-destination-item:focus-within .top-destination-contact,
+.top-destination-contact:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.top-destination-contact:hover {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.about-instagram-link,
+.about-instagram-link:hover,
+.about-instagram-link:focus {
+  text-decoration: underline !important;
+}
+
+.dest-card-details-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .dest-card:hover .dest-img img {
   transform: scale(1.1);
   filter: grayscale(100%);
-}
-
-.dest-price {
-  padding: 10px;
-  background-image: var(--prim-gradient);
-  color: var(--white);
-  border-radius: 10px;
-  font-weight: 600;
-  font-family: var(--Urbanist-fonts);
-  position: absolute;
-  /* Ensure it's absolutely positioned */
-  top: 5% !important;
-  right: 2% !important;
 }
 
 .dest-content {
@@ -2582,10 +2625,20 @@ body {
   opacity: .5;
 }
 
-.dest-title-price {
+.dest-title {
   padding: 20px 14px 15px;
   border-bottom: 1px solid rgb(59, 21, 230);
 
+}
+
+.about-destination-details-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.about-destination-details-link:hover {
+  color: inherit;
+  text-decoration: none;
 }
 
 .trip-time {
@@ -2718,6 +2771,16 @@ body {
   gap: 10px;
   overflow: hidden;
   position: relative;
+}
+
+.about .travel-experience-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.about .travel-experience-btn .about-find-more-btn {
+  display: block !important;
+  flex: 0 0 190px;
 }
 
 .find-more-btn img {
@@ -3078,6 +3141,10 @@ body {
   width: 80% !important;
 }
 
+.reviews .price-card > .btn-box {
+  margin-top: auto;
+}
+
 /* Gallery */
 .gallery-grid {
   overflow: hidden;
@@ -3315,6 +3382,36 @@ footer p:hover {
   height: 300px;
   overflow: hidden;
   position: relative;
+}
+
+.tour-card-img .tour-contact-link {
+  position: absolute;
+  top: 1rem;
+  right: 5%;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 105, 0, 1), rgba(207, 46, 46, 1));
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tour-card-img .tour-contact-link span {
+  position: static;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+}
+
+.tour-card-img .tour-contact-city {
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .tour-card-img img {
@@ -4426,8 +4523,22 @@ textarea.form-control {
     opacity: 0.35;
   }
 
+  .top-destination-item .top-destination-contact {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
   .top-destination-item .top-destination-icons i {
     opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .top-destination-item .top-destination-contact {
+    opacity: 1;
+    pointer-events: auto;
     transform: none;
   }
 }

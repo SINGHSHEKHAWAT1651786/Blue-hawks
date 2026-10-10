@@ -15,7 +15,6 @@ import travelIcon1 from '../../assets/travel-icon1.webp';
 import tst1 from '../../assets/tst-1.webp';
 import tst2 from '../../assets/tst-2.webp';
 import tst3 from '../../assets/tst-3.webp';
-import tst4 from '../../assets/tst-4.webp';
 import travelexperienceimage1 from '../../assets/experience-image1.webp';
 import travelexperienceimage2 from '../../assets/experience-image2.webp';
 import travelexperienceimage3 from '../../assets/experience-image3.webp';
@@ -111,14 +110,32 @@ function About() {
                     </div>
                   </div>
                   <div className="top-destination-content">
-                    <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                      <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
-                      <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>{trip.price}</span>
+                    <div className="dest-title position-relative d-flex justify-content-between align-items-center border-b">
+                      <Link
+                        to={`/Tour-details/${trip.id}`}
+                        state={{ tours: trip }}
+                        className="about-destination-details-link"
+                        aria-label={`View ${trip.name} trip details`}
+                      >
+                        <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
+                      </Link>
+                      <Link
+                        to="/Contact"
+                        className="package-contact-link top-destination-contact"
+                        aria-label={`Contact us for ${trip.name} package details`}
+                      >
+                        <span>Contact us</span>
+                      </Link>
                     </div>
-                    <div className="trip-time fs-5 d-flex justify-content-between align-items-center">
+                    <Link
+                      to={`/Tour-details/${trip.id}`}
+                      state={{ tours: trip }}
+                      className="trip-time fs-5 d-flex justify-content-between align-items-center about-destination-details-link"
+                      aria-label={`View ${trip.name} trip details: ${trip.days}, ${trip.location}`}
+                    >
                       <span><i className="fa-solid fa-location-arrow pe-1" />{trip.days}</span>
                       <span>{trip.location}</span>
-                    </div>
+                    </Link>
                   </div>
                 </article>
               </div>
@@ -134,7 +151,7 @@ function About() {
               <div className="section-title travel top-experience-title">
                 <div className="d-flex align-items-center gap-3 mb-3">
                   <img src={star} className="img-fluid" alt="star-image" />
-                  <h3 className="m-0">Get To Know Us</h3>
+                  <h3 className="m-0">Travel, Your Way</h3>
                 </div>
 
                 <h2>Get the Best Travel Experience</h2>
@@ -142,16 +159,14 @@ function About() {
                   <li className="d-flex align-items-center gap-3 pb-4">
                     <img src={travelIcon1} alt="travel-icon" width={50} height={50} />
                     <div>
-                      <h4>Friendly price</h4>
                       <p>
-                        We don't just work with concrete and steel, <br />
-                        We are approachable, with even our highest
+                        Thoughtfully planned journeys, helpful local insight, and friendly support from your first idea to the trip home.
                       </p>
                     </div>
                   </li>
                 </ul>
-                <div className="travel-experience-btn d-flex flex-column flex-sm-row align-items-center gap-3 mt-4">
-                  <div className="btn-box">
+                <div className="travel-experience-btn d-flex flex-column flex-sm-row align-items-center justify-content-center gap-3 mt-4">
+                  <div className="btn-box about-find-more-btn">
                     <a
                       href={googleReviewsUrl}
                       target="_blank"
@@ -161,13 +176,6 @@ function About() {
                       <span>Find More</span>
                       <img src={btnArrow} className="img-fluid ms-2" alt="Arrow Icon" />
                     </a>
-                  </div>
-                  <div className="travel-experience-user d-flex align-items-center ps-sm-4">
-                    <img src={tst1} alt="user" />
-                    <img src={tst2} alt="user" />
-                    <img src={tst3} alt="user" />
-                    <img src={tst4} alt="user" />
-                    <span className="ms-2">50+</span>
                   </div>
                 </div>
               </div>
@@ -223,7 +231,7 @@ function About() {
                     <img src={tst1} alt="user" />
                     <img src={tst2} alt="user" />
                     <img src={tst3} alt="user" />
-                    <span className="ms-2">50+</span>
+                    <span className="ms-2">500+</span>
                   </div>
                   <p style={{ fontWeight: "700", fontSize: "1.3rem" }}>500k+ Happy Customer</p>
                 </div>
@@ -394,102 +402,102 @@ function About() {
               <div className="row g-4 justify-content-center">
                 <div className="col-lg-4">
                   <div className="card h-100 shadow-lg round-4 p-5 text-start border-0 price-card">
-                    <h2><sup>$</sup>99<small>/month</small></h2>
                     <div className="d-flex justify-content-center my-4 w-100">
                       <img src={price1} alt="tour1" className="object-fit-cover" width='70%' style={{ borderRadius: "100px" }} />
                       <img src={price2} alt="tour2" className="rounded-circle ms-2  object-fit-cover" width='70%' />
                     </div>
                     <h4 className="fw-bold fd-1">Turkey Tour</h4>
                     <p className="text-muted fs-5">
-                      We don't just wprk concerate and steel. Approachable, with even our highest concerate.
+                      Discover Turkey’s ancient landmarks, lively bazaars, and dramatic landscapes on a memorable cultural escape.
                     </p>
                     <hr />
                     <ul className="list-unstyled text-start card-price-list p-0">
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Guided cultural sightseeing
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Audio Player
+                        Local food and market experiences
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Scenic regional excursions
                       </li>
                     </ul>
 
-                    <div className="btn-box-1">
-                      <button className="btn custom-btn-2">
-                        Get Started
-                      </button>
+                    <div className="btn-box">
+                      <Link to="/Contact" className="btn custom-btn1">
+                        <span>Get Started</span>
+                        <img src={btnArrow} className="img-fluid ms-2" alt="" />
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-4">
                   <div className="card h-100 shadow-lg round-4 p-5 text-start border-0 price-card">
-                    <h2><sup>$</sup>77<small>/month</small></h2>
                     <div className="d-flex justify-content-center my-4 w-100">
                       <img src={price3} alt="tour1" className="object-fit-cover" width='70%' style={{ borderRadius: "100px" }} />
                       <img src={price4} alt="tour2" className="rounded-circle ms-2  object-fit-cover" width='70%' />
                     </div>
                     <h4 className="fw-bold fd-1">India Tour</h4>
                     <p className="text-muted fs-5">
-                      We don't just wprk concerate and steel. Approachable, with even our highest concerate.
+                      Explore India’s iconic heritage, vibrant cities, and regional cuisine with a trip shaped around your interests.
                     </p>
                     <hr />
                     <ul className="list-unstyled text-start card-price-list p-0">
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Heritage and city sightseeing
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Audio Player
+                        Local cuisine and cultural experiences
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Flexible regional itineraries
                       </li>
                     </ul>
 
-                    <div className="btn-box-1">
-                      <button className="btn custom-btn-2">
-                        Get Started
-                      </button>
+                    <div className="btn-box">
+                      <Link to="/Contact" className="btn custom-btn1">
+                        <span>Get Started</span>
+                        <img src={btnArrow} className="img-fluid ms-2" alt="" />
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-4">
                   <div className="card h-100 shadow-lg round-4 p-5 text-start border-0 price-card">
-                    <h2><sup>$</sup>67<small>/month</small></h2>
                     <div className="d-flex justify-content-center my-4 w-100">
                       <img src={price3} alt="tour1" className="object-fit-cover" width='70%' style={{ borderRadius: "100px" }} />
                       <img src={price4} alt="tour2" className="rounded-circle ms-2 object-fit-cover" width='70%' />
                     </div>
                     <h4 className="fw-bold fd-1">World Tour</h4>
                     <p className="text-muted fs-5">
-                      We don't just wprk concerate and steel. Approachable, with even our highest concerate.
+                      Plan a multi-country journey filled with iconic landmarks and local experiences, tailored to the way you like to travel.
                     </p>
                     <hr />
                     <ul className="list-unstyled text-start card-price-list p-0">
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Multi-destination itinerary planning
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Audio Player
+                        Local guides and cultural experiences
                       </li>
                       <li className="fw-bold mb-3">
                         <i className="fa-regular fa-circle-check pe-2 fa-lg"></i>
-                        Generation Technology
+                        Flexible stays and transfers
                       </li>
                     </ul>
-                    <div className="btn-box-1">
-                      <button className="btn custom-btn-2">
-                        Get Started
-                      </button>
+                    <div className="btn-box">
+                      <Link to="/Contact" className="btn custom-btn1">
+                        <span>Get Started</span>
+                        <img src={btnArrow} className="img-fluid ms-2" alt="" />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -497,7 +505,16 @@ function About() {
             </div>
           </div>
           <p className="price-bottom-text text-center mt-5 fs-5">
-            Want to see our Recent News & Update.<a href="#" className="text-decoration-none fw-bold">Click here to View More</a>
+            Want to see our Recent News & Update.{" "}
+            <a
+              href="https://www.instagram.com/bluehawks_travelwithease/"
+              className="about-instagram-link fw-bold"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Blue Hawks on Instagram"
+            >
+              Follow us on Instagram
+            </a>
           </p>
         </div>
       </section>

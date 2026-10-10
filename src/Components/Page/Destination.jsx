@@ -87,14 +87,32 @@ function Destination(){
                     </div>
                   </div>
                   <div className="top-destination-content">
-                    <div className="dest-title-price position-relative d-flex justify-content-between align-items-center border-b">
-                      <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
-                      <span className="fs-bold fs-4 m-0" style={{ fontWeight: '800' }}>{trip.price}</span>
+                    <div className="dest-title position-relative d-flex justify-content-between align-items-center border-b">
+                      <Link
+                        to={`/Tour-details/${trip.id}`}
+                        state={{ tours: trip }}
+                        className="about-destination-details-link"
+                        aria-label={`View ${trip.name} trip details`}
+                      >
+                        <h3 className="dst-title fw-bolder fs-4 m-0" style={{ fontWeight: '800' }}>{trip.name}</h3>
+                      </Link>
+                      <Link
+                        to="/Contact"
+                        className="package-contact-link top-destination-contact"
+                        aria-label={`Contact us for ${trip.name} package details`}
+                      >
+                        <span>Contact us</span>
+                      </Link>
                     </div>
-                    <div className="trip-time fs-5 d-flex justify-content-between align-items-center">
+                    <Link
+                      to={`/Tour-details/${trip.id}`}
+                      state={{ tours: trip }}
+                      className="trip-time fs-5 d-flex justify-content-between align-items-center about-destination-details-link"
+                      aria-label={`View ${trip.name} trip details: ${trip.days}, ${trip.location}`}
+                    >
                       <span><i className="fa-solid fa-location-arrow pe-1" />{trip.days}</span>
                       <span>{trip.location}</span>
-                    </div>
+                    </Link>
                     <p className="destination-card-description">{trip.pere}</p>
                   </div>
                 </article>

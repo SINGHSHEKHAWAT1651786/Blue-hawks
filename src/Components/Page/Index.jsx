@@ -177,30 +177,29 @@ function Index() {
             <SplideTrack>
               {Destination.map(dest => (
                 <SplideSlide key={dest.id}>
-                  <Link
-                    to={`/Tour-details/${dest.id}`}
-                    state={{ tours: dest }}
-                    className="dest-card-link"
-                    aria-label={`View ${dest.name} trip details`}
-                  >
-                  <div className="dest-card position-relative">
-                    <div className="dest-img overflow-hidden rounded">
-                      <img src={dest.image} className="img-fluid" alt={dest.name} />
-                      <span className="dest-price position-absolute top-0 end-0">
-                        {dest.price}
-                      </span>
-                    </div>
-                    <div className="dest-content p-4 rounded border-top-0 start-0 mt-3 position-absolute">
-                      <i className="fa-solid fa-arrow-right dest-arrow position-absolute"></i>
-                      <h2>{dest.name}</h2>
-                      <p>{dest.pere}</p>
-                      <div className="dest-day border-top pt-3">
-                        <i className="bi bi-send-fill me-2"></i>
-                        <span>{dest.days}</span>
-                      </div>
+                  <div className="dest-card-link">
+                    <div className="dest-card position-relative">
+                      <Link
+                        to={`/Tour-details/${dest.id}`}
+                        state={{ tours: dest }}
+                        className="dest-card-details-link"
+                        aria-label={`View ${dest.name} trip details`}
+                      >
+                        <div className="dest-img overflow-hidden rounded">
+                          <img src={dest.image} className="img-fluid" alt={dest.name} />
+                        </div>
+                        <div className="dest-content p-4 rounded border-top-0 start-0 mt-3 position-absolute">
+                          <i className="fa-solid fa-arrow-right dest-arrow position-absolute"></i>
+                          <h2>{dest.name}</h2>
+                          <p>{dest.pere}</p>
+                          <div className="dest-day border-top pt-3">
+                            <i className="bi bi-send-fill me-2"></i>
+                            <span>{dest.days}</span>
+                          </div>
+                        </div>
+                      </Link>
                     </div>
                   </div>
-                  </Link>
                 </SplideSlide>
               ))}
             </SplideTrack>
@@ -422,10 +421,6 @@ function Index() {
                   </Link>
                 </div>
 
-                {/* Large Decorative Offer Number */}
-                <div className="offer-text position-absolute">
-                  <h1 className="offer-number">20<span>% OFF</span></h1>
-                </div>
               </div>
             </div>
           </div>

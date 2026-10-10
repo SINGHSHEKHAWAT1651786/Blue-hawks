@@ -61,12 +61,6 @@ function Tour() {
         switch (sortBy) {
             case "name":
                 return firstTour.name.localeCompare(secondTour.name);
-            case "price-low":
-                return Number(firstTour.price.replace(/[^0-9.]/g, "")) -
-                    Number(secondTour.price.replace(/[^0-9.]/g, ""));
-            case "price-high":
-                return Number(secondTour.price.replace(/[^0-9.]/g, "")) -
-                    Number(firstTour.price.replace(/[^0-9.]/g, ""));
             case "duration-short":
                 return Number.parseInt(firstTour.days, 10) - Number.parseInt(secondTour.days, 10);
             case "duration-long":
@@ -154,8 +148,6 @@ function Tour() {
                                         >
                                             <option value="featured">Featured</option>
                                             <option value="name">Name (A–Z)</option>
-                                            <option value="price-low">Price (low to high)</option>
-                                            <option value="price-high">Price (high to low)</option>
                                             <option value="duration-short">Duration (shortest first)</option>
                                             <option value="duration-long">Duration (longest first)</option>
                                         </select>
@@ -169,16 +161,21 @@ function Tour() {
                                             <div className="tour-card shadow-sm">
                                                 <div className="tour-card-img">
                                                     <img src={Data.image} className="img-fluid rounded" alt="" />
+                                                    <Link
+                                                        to="/Contact"
+                                                        className="tour-contact-link"
+                                                        aria-label={`Contact about ${Data.name} package details`}
+                                                    >
+                                                        <span className="tour-contact-city">{Data.location}</span>
+                                                    </Link>
                                                 </div>
-                                                <span><i className="bi bi-geo0alt-fill"></i>{Data.location}</span>
                                                 <div className="tour-card-content mt-4 px-3">
                                                     <Link to={`/Tour-details/${Data.id}`} state={{ tours: Data }} className="text-black text-decoration-none"><h2>{Data.name}</h2></Link>
                                                     <div className="tour-card-box border-top py-3 d-flex justify-content-between gap-2 mt-3">
                                                         <p><i className="bi bi-clock-history"></i>{Data.days}</p>
-                                                        <p className="mb-0 fw-bold">{Data.price.startsWith("$") ? Data.price : `$${Data.price}`}</p>
                                                         <Link to={`/Tour-details/${Data.id}`} state={{ tours: Data }}>
-  View-Details
-</Link>
+                                                            View-Details
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>

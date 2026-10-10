@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import blogAuthor from '../../assets/blog-author.jpeg';
 import blogPosts from './blogPosts';
 
 function Blog() {
@@ -68,7 +67,7 @@ function Blog() {
                     <div className="row g-5">
                         <section className="col-lg-8" aria-labelledby="blog-heading">
                             <div className="mb-4">
-                                <span className="text-primary fw-bold">BLUEHAWK TRAVEL JOURNAL</span>
+                                <span className="text-primary fw-bold">BLUE HAWKS TRAVEL JOURNAL</span>
                                 <h1 id="blog-heading" className="fw-bold mt-2">Ideas for your next journey</h1>
                                 <p className="text-secondary mb-0">
                                     Destination guides, thoughtful itineraries, and practical tips from the road.
@@ -96,14 +95,6 @@ function Blog() {
                                                 <h2 className="blog-post-title mb-3">{post.title}</h2>
                                                 <p className="mb-4">{post.excerpt}</p>
                                                 <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                                                    <div className="d-flex align-items-center gap-2">
-                                                        <img
-                                                            src={blogAuthor}
-                                                            className="blog-author-img blog-post-author"
-                                                            alt=""
-                                                        />
-                                                        <span className="fw-semibold">{post.author}</span>
-                                                    </div>
                                                     <button
                                                         type="button"
                                                         className="btn btn-link blog-read-button p-0"
@@ -229,7 +220,7 @@ function Blog() {
                         <div className="p-4 p-md-5">
                             <span className="blog-post-category">{selectedPost.category}</span>
                             <p className="text-secondary mt-3 mb-2">
-                                {selectedPost.date} · {selectedPost.readTime} · By {selectedPost.author}
+                                {selectedPost.date} · {selectedPost.readTime}
                             </p>
                             <h2 id="blog-dialog-title" className="fw-bold mb-4">{selectedPost.title}</h2>
                             {selectedPost.content.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}

@@ -40,12 +40,11 @@ function ToursDetails() {
   const whatsappUrl = `https://wa.me/${contactDetails.whatsappNumber}?text=${whatsappMessage}`;
 
   const facts = [
-    { icon: "bi-calendar2-week", label: "Duration", value: tour.days },
-    { icon: "bi-cash-coin", label: "Price per traveler", value: tour.price },
-    { icon: "bi-hospital", label: "Accommodation", value: tour.accommodation },
-    { icon: "bi-airplane", label: "Arrival city", value: tour.arrivalCity },
-    { icon: "bi-calendar2-heart", label: "Best season", value: tour.bestSeason },
-    { icon: "bi-stars", label: "Trip type", value: tour.tripType },
+    { label: "Duration", value: tour.days },
+    { label: "Accommodation", value: tour.accommodation },
+    { label: "Arrival city", value: tour.arrivalCity },
+    { label: "Best season", value: tour.bestSeason },
+    { label: "Trip type", value: tour.tripType },
   ];
 
   return (
@@ -99,7 +98,7 @@ function ToursDetails() {
               </p>
               <h1 className="fw-bold">{tour.name}</h1>
               <p className="fs-5 text-secondary">{tour.pere}</p>
-              <p className="fs-4 fw-bold text-primary">{tour.price} <small className="fs-6 text-secondary">per traveler</small></p>
+              <p className="package-contact-message mb-3">Contact us for package details</p>
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -115,9 +114,8 @@ function ToursDetails() {
           <div className="row mt-4">
             <div className="col-12">
               <div className="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-4 mt-2">
-                {facts.map(({ icon, label, value }) => (
+                {facts.map(({ label, value }) => (
                   <div key={label} className="col d-flex align-items-center">
-                    <i className={`bi ${icon} me-3 destination-details-icon`} aria-hidden="true" />
                     <div className="destination-details-info">
                       {label}:<br />
                       <strong>{value}</strong>
